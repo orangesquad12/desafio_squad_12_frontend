@@ -1,10 +1,10 @@
 import Image from "../assets/img/CheckCircleOutlined.png"
-function RegisterSucess(){
+function RegisterSuccess(){
     return (
-        <div className="registersucess">
+        <div className="registersuccess">
             <img src={Image} alt="" />
             <p>Cadastro feito com sucesso</p>
         </div>
     )
 }
-export default RegisterSucess
+export default RegisterSuccess

@@ -8,20 +8,15 @@
   box-sizing: border-box;
 }
 
-
-/*  H1  */
-h1 {
+body {
   font-family: 'Roboto', sans-serif;
-  font-size: 48px;
-  font-weight: 400;
-  color: #222244;
 }
 
 /* BOTÃO LG */
 
 .button-lg {
   background: linear-gradient(135deg, #FF8833, #FF5522);
-  width: 517px;
+  width: auto;
   height: 42px;
   text-transform: uppercase;
   border-radius: 4px;
@@ -178,9 +173,6 @@ h1 {
 /* IMG */
 
 .left-side img {
-  display: flex;
-  justify-content: flex-start;
-  /* border: 1px solid red; */
   display: block;
   position: absolute;
   top: 0;
@@ -192,9 +184,11 @@ h1 {
   text-align: center;
 }
 
-.registersucess{
+/* MODAL CADASTRO SUCESSO */
+
+.registersucess {
   width: 320px;
-  padding: 6px 16px ;
+  padding: 6px 16px;
   border-radius: 4px;
   color: white;
   background-color: #2E7D32;
@@ -204,15 +198,85 @@ h1 {
   font-style: normal;
   font-weight: 500;
   line-height: 150%;
-  letter-spacing: 0.15px; 
+  letter-spacing: 0.15px;
   margin-top: 100px;
   margin-left: 100px;
-  
+
 }
 
-.registersucess img{
+.registersucess img {
   width: 22px;
   height: 22px;
   margin-right: 12px;
   margin-left: 2px;
+}
+
+
+/* ----------
+  LOGIN 
+---------- */
+
+/* Container Formulário Login */
+.form-login {
+  display: flex;
+  align-items: center;
+}
+
+/* IMG Login */
+
+.login-left img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+/*  Formulário Login */
+.login-right {
+  width: auto;
+  margin-left: 700px;
+  margin-top: 100px;
+}
+
+
+/* Botão Google Login */
+
+.googlebtn {
+  display: block;
+  margin: 32px 200px;
+}
+
+/* Títlulo Orange Portfólio H3 */
+
+.login-right h3 {
+  font-size: 48px;
+  font-weight: 400;
+  text-align: center;
+  color: #222244;
+  margin-right: 18px;
+}
+
+
+/*  Subtítulo Faça Login Email */
+
+.login-right h5 {
+
+  font-size: 24px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  font-weight: 400;
+  color: #515255;
+
+}
+
+/* BTN Cadastrar */
+
+.btnregister {
+  margin-top: 18px;
+  margin-left: 16px;
+  color: #818388;
+}
+
+.link-register {
+  text-decoration: none;
 }

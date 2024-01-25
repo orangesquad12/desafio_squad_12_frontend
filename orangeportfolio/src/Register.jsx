@@ -10,12 +10,13 @@ function Register() {
       <div className="left-side">
         <img src={Cadastroimg} alt="Tela de Cadastro" />
       </div>
+
       <div className="right-side">
         <h1>Cadastre-se</h1>
         <FormRegister />
         <ButtonLarge />
       </div>
-    </div>
+    </div >
 
 
 

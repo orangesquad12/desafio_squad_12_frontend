@@ -4,25 +4,27 @@ function FormRegister() {
         <div className="container__form">
             <form>
                 <div className="form">
-                    <fieldset className="inputname">
-                        <legend className="legendname">Nome *
+                    <fieldset className="field-name">
+                        <legend className="legend-name">Nome *
                         </legend>
-                        <input type="text" className="textname"></input>
+                        <input type="text" className="input-name"></input>
                     </fieldset>
-                    <input type="text" placeholder="Sobrenome *" className="textlastname"></input>
+                    <fieldset class="field-lastname">
+                        <input type="text" placeholder="Sobrenome *" className="input-lastname"></input>
+                    </fieldset>
                 </div>
-                <fieldset>
-                    <legend>
+                <fieldset class="field-email">
+                    <legend className="legend-email">
                         Email address
                     </legend>
-                    <input type="text" placeholder="Camila.ux@gmail.com"></input>
+                    <input type="text" placeholder="Camila.ux@gmail.com" className="input-email"></input>
                 </fieldset>
-                <fieldset>
-                    <legend>
+                <fieldset class="field-pass">
+                    <legend className="legend-pass">
                         Password
                     </legend>
-                    <input type="password"></input>
-                    <img src={IconPassword}></img>
+                    <input type="password" className="input-pass"></input>
+                    <img src={IconPassword} className="icon-pass"></img>
                 </fieldset>
             </form >
         </div >

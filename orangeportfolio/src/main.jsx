@@ -8,6 +8,6 @@ import NavBar from './components/NavBar.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Login/>
+    <Register/>
   </React.StrictMode>,
 )

@@ -320,3 +320,100 @@ body {
 .link-register {
   text-decoration: none;
 }
+
+/* Media Screen Register*/
+@media screen and (max-width: 1469px) {
+
+  .container__register {
+    justify-content: space-between;
+    padding-right: 10em;
+    
+  }
+}
+
+@media screen and (max-width: 1289px) {
+  .container__register {
+    justify-content: space-between;
+    padding-right: 6em;
+    
+  }
+}
+
+@media screen and (max-width: 1183px) {
+  .container__register {
+    justify-content: space-between;
+    padding-right: 2em;
+    
+  }
+}
+
+@media screen and (max-width: 1107px) {
+  .container__register {
+    justify-content: center;
+    padding: 0px;
+  }
+  .left-side{
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 1816px) {
+  .left-side img {
+     width: 40%;
+  }
+}
+
+@media screen and (max-width: 619px) {
+  
+  .container__register{
+    justify-content: none;
+  }
+  .container__form{
+    justify-content: center;
+  }
+  .form{
+    flex-direction: column;
+    width: 100%;
+ 
+  }
+  .form fieldset{
+    width: 312px;
+    margin-bottom: 16px;
+    margin-left: 0px;
+  }
+
+  .field-email, .field-pass{
+    width: 312px;
+    margin-left: 0px;
+
+  }
+  .field-lastname{
+      margin-top: 0px;
+    }
+
+  .field-name{
+    height: 56px;
+  }
+  .right-side h1{
+    font-family: Roboto;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+  }
+
+  .registersuccess{
+    margin: 0;
+    margin-left: 2px;
+    margin-bottom: 56px;
+    width: 312px;
+
+  }
+
+  .button-lg{
+    margin-left: 1px;
+    width: 312px;
+  }
+
+}

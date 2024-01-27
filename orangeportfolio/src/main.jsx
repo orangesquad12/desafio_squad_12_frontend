@@ -6,8 +6,13 @@ import Login from './Login.jsx'
 import NavBar from './components/NavBar.jsx'
 
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Register/>
+    {/* <NavBar /> */}
+    {/* <Register /> */}
+    <Login />
   </React.StrictMode>,
 )
+
+

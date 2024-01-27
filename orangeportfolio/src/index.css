@@ -37,6 +37,10 @@ body {
 }
 
 .register-link p {
+  margin: 0 auto;
+  margin-top: 16px;
+  width: 517px;
+  height: 42px;
   text-align: center;
   padding-top: 7px;
 }
@@ -60,7 +64,6 @@ body {
 .right-side {
   display: flex;
   flex-direction: column;
-  /* border: 1px solid red; */
   justify-content: space-between;
 }
 
@@ -137,9 +140,22 @@ body {
 
 /* FIELDSET EMAIL & PASSWORD */
 
-.field-email,
-.field-pass {
-  width: 97%;
+.field-email-login,
+.field-pass-login {
+  width: 517px;
+  height: 56px;
+  border-radius: 4px;
+  margin: 0 auto;
+  margin-bottom: 16px;
+}
+
+.field-email-login {
+  margin-top: 16px;
+
+}
+
+.field-email {
+  width: 517px;
   height: 56px;
   border-radius: 4px;
   margin-bottom: 16px;
@@ -186,7 +202,7 @@ body {
 
 
 /*REGISTER SUCESS COMPONENT*/
-.registersuccess{
+.registersuccess {
   width: 320px;
   padding: 6px 16px;
   border-radius: 4px;
@@ -201,7 +217,7 @@ body {
   letter-spacing: 0.15px;
   margin-bottom: 76px;
   margin-left: 7em;
- 
+
 }
 
 .registersuccess img {
@@ -211,7 +227,7 @@ body {
 }
 
 /*NavBar Component*/
-.navBar{
+.navBar {
   width: 100%;
   height: 73px;
   background-color: #111133;
@@ -219,71 +235,84 @@ body {
   align-items: center;
 }
 
-.navBarLogo{
+.navBarLogo {
   width: 111px;
   height: 41px;
   margin-left: 1.9em;
 }
 
-.navBarMenu{
+.navBarMenu {
   display: flex;
   margin-left: 6.3em;
 }
 
-.navBarMenu a{
+.navBarMenu a {
   text-decoration: none;
   font-family: Roboto;
   font-size: 20px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px; 
+  line-height: 20px;
   letter-spacing: 0.15px;
   color: white;
-  margin-right:1.2em;
+  margin-right: 1.2em;
 }
-.navSideRight{
- display: flex;
- margin-left: auto;
- margin-right: 1.9em;
+
+.navSideRight {
+  display: flex;
+  margin-left: auto;
+  margin-right: 1.9em;
 }
-.navBarAvatar{
+
+.navBarAvatar {
   width: 40px;
   height: 40px;
   border-radius: 300px;
   margin-right: 2px;
 }
+
 /* ----------
   LOGIN 
 ---------- */
 
 /* Container Formulário Login */
+
+
+
 .form-login {
   display: flex;
-  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
 }
+
 
 /* IMG Login */
 
 .login-left img {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
+  width: 100%;
   height: 100vh;
 }
 
 /*  Formulário Login */
+
+
 .login-right {
-  width: auto;
-  margin-left: 700px;
-  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+
 }
 
 
 /* Botão Google Login */
 
 .googlebtn {
+  width: 180px;
+  height: 46px;
   display: block;
-  margin: 32px 200px;
+  margin: 32px auto;
 }
 
 /* Títlulo Orange Portfólio H3 */
@@ -302,7 +331,7 @@ body {
 .login-right h5 {
 
   font-size: 24px;
-  margin-bottom: 16px;
+  margin-top: 32px;
   margin-left: 16px;
   font-weight: 400;
   color: #515255;
@@ -321,13 +350,110 @@ body {
   text-decoration: none;
 }
 
+
+
+/* Media Screen Login  */
+
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .login-right {
+    margin: 0 auto;
+  }
+
+  .field-email-login,
+  .field-pass-login,
+  .register-link p {
+    width: 480px;
+  }
+
+  .googlebtn {
+    width: 150px;
+    height: 36px;
+    margin-bottom: 16px;
+  }
+
+  .login-right h3 {
+    font-size: 34px;
+  }
+
+
+}
+
+@media all and (min-width: 480px) and (max-width: 768px) {
+
+  .form-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 109px;
+  }
+
+
+
+  .login-left {
+    display: none;
+  }
+
+
+  .login-right {
+    margin: 16px;
+  }
+
+  .register-link p {
+
+    margin-left: 16px;
+  }
+
+  .login-right {
+    margin-right: 10px;
+  }
+
+  .login-right h3 {
+    font-size: 34px;
+  }
+
+}
+
+@media only screen and (min-width: 320px) and (max-width: 479px) {
+
+  .login-right {
+    margin-top: 109px;
+  }
+
+  .login-left {
+    display: none;
+  }
+
+  .login-right h3 {
+    font-size: 24px;
+  }
+
+  .register-link p {
+    width: 300px;
+  }
+
+  .field-email-login,
+  .field-pass-login {
+    width: 300px;
+  }
+
+  .link-register p {
+    margin: 0 auto;
+    margin-top: 16px;
+  }
+
+
+}
+
+
+
+
 /* Media Screen Register*/
 @media screen and (max-width: 1469px) {
 
   .container__register {
     justify-content: space-between;
     padding-right: 10em;
-    
+
   }
 }
 
@@ -335,7 +461,7 @@ body {
   .container__register {
     justify-content: space-between;
     padding-right: 6em;
-    
+
   }
 }
 
@@ -343,7 +469,7 @@ body {
   .container__register {
     justify-content: space-between;
     padding-right: 2em;
-    
+
   }
 }
 
@@ -352,7 +478,8 @@ body {
     justify-content: center;
     padding: 0px;
   }
-  .left-side{
+
+  .left-side {
     display: none;
   }
 
@@ -360,42 +487,48 @@ body {
 
 @media screen and (max-width: 1816px) {
   .left-side img {
-     width: 40%;
+    width: 40%;
   }
 }
 
 @media screen and (max-width: 619px) {
-  
-  .container__register{
+
+  .container__register {
     justify-content: none;
   }
-  .container__form{
+
+  .container__form {
     justify-content: center;
   }
-  .form{
+
+  .form {
     flex-direction: column;
     width: 100%;
- 
+
   }
-  .form fieldset{
+
+  .form fieldset {
     width: 312px;
     margin-bottom: 16px;
     margin-left: 0px;
   }
 
-  .field-email, .field-pass{
+  .field-email,
+  .field-pass {
     width: 312px;
     margin-left: 0px;
 
   }
-  .field-lastname{
-      margin-top: 0px;
-    }
 
-  .field-name{
+  .field-lastname {
+    margin-top: 0px;
+  }
+
+  .field-name {
     height: 56px;
   }
-  .right-side h1{
+
+  .right-side h1 {
     font-family: Roboto;
     font-size: 28px;
     font-style: normal;
@@ -403,7 +536,7 @@ body {
     line-height: 24px;
   }
 
-  .registersuccess{
+  .registersuccess {
     margin: 0;
     margin-left: 2px;
     margin-bottom: 56px;
@@ -411,9 +544,9 @@ body {
 
   }
 
-  .button-lg{
-    margin-left: 1px;
+  .button-lg {
+    margin: 0 auto;
     width: 312px;
+    height: 47px;
   }
-
 }

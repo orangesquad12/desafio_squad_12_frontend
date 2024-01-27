@@ -18,11 +18,11 @@ function Login() {
                         <h3>Entre no Orange Portfólio</h3>
                         <a href="#"><img src={Googlebtn} alt="Logar com Google Email" className="googlebtn" /></a>
                         <h5>Faça login com email</h5>
-                        <fieldset className="field-email">
+                        <fieldset className="field-email-login">
                             <input type="password" className="input-email"></input>
                             <legend className="legend-email">Email Address</legend>
                         </fieldset>
-                        <fieldset className="field-pass">
+                        <fieldset className="field-pass-login">
                             <input type="password" className="input-pass"></input>
                             <legend className="legend-pass">Password</legend>
                             <img src={IconPassword} className="icon-pass"></img>

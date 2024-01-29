@@ -9,13 +9,13 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 /* BOTÃO LG */
 
 .button-lg {
-  background: linear-gradient(135deg, #FF8833, #FF5522);
+  background: linear-gradient(135deg, #ff8833, #ff5522);
   width: auto;
   height: 42px;
   text-transform: uppercase;
@@ -48,16 +48,13 @@ body {
 /* CADASTRO  */
 
 .container__register {
-
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: space-evenly;
   justify-self: center;
   align-items: center;
-
 }
-
 
 /* FORM CONTAINER */
 
@@ -67,21 +64,17 @@ body {
   justify-content: space-between;
 }
 
-
 .container__form {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-content: center;
-
-
 }
 
 /* FORM NOME & SOBRENOME */
 .form {
   display: flex;
 }
-
 
 /* INPUT NOME CADASTRO */
 
@@ -91,10 +84,7 @@ body {
   border-radius: 4px;
   margin-bottom: 16px;
   margin-left: 16px;
-
 }
-
-
 
 /* INPUT SOBRENOME CADASTRO */
 .field-lastname {
@@ -114,7 +104,6 @@ body {
   margin-left: 16px;
   font-size: 12px;
   line-height: 16px;
-
 }
 
 /* INPUT NOME */
@@ -151,7 +140,6 @@ body {
 
 .field-email-login {
   margin-top: 16px;
-
 }
 
 .field-email {
@@ -200,14 +188,13 @@ body {
   text-align: center;
 }
 
-
 /*REGISTER SUCESS COMPONENT*/
 .registersuccess {
   width: 320px;
   padding: 6px 16px;
   border-radius: 4px;
   color: white;
-  background-color: #2E7D32;
+  background-color: #2e7d32;
   display: flex;
   font-family: Roboto, sans-serif;
   font-size: 16px;
@@ -217,7 +204,6 @@ body {
   letter-spacing: 0.15px;
   margin-bottom: 76px;
   margin-left: 7em;
-
 }
 
 .registersuccess img {
@@ -277,14 +263,11 @@ body {
 
 /* Container Formulário Login */
 
-
-
 .form-login {
   display: flex;
   justify-content: center;
   margin: 0 auto;
 }
-
 
 /* IMG Login */
 
@@ -296,15 +279,12 @@ body {
 
 /*  Formulário Login */
 
-
 .login-right {
   display: flex;
   justify-content: center;
   flex-direction: column;
   margin: 0 auto;
-
 }
-
 
 /* Botão Google Login */
 
@@ -325,17 +305,14 @@ body {
   margin-right: 18px;
 }
 
-
 /*  Subtítulo Faça Login Email */
 
 .login-right h5 {
-
   font-size: 24px;
   margin-top: 32px;
   margin-left: 16px;
   font-weight: 400;
   color: #515255;
-
 }
 
 /* BTN Cadastrar */
@@ -349,8 +326,6 @@ body {
 .link-register {
   text-decoration: none;
 }
-
-
 
 /* Media Screen Login  */
 
@@ -374,12 +349,9 @@ body {
   .login-right h3 {
     font-size: 34px;
   }
-
-
 }
 
 @media all and (min-width: 480px) and (max-width: 768px) {
-
   .form-login {
     display: flex;
     justify-content: center;
@@ -387,19 +359,15 @@ body {
     margin-top: 109px;
   }
 
-
-
   .login-left {
     display: none;
   }
-
 
   .login-right {
     margin: 16px;
   }
 
   .register-link p {
-
     margin-left: 16px;
   }
 
@@ -410,11 +378,9 @@ body {
   .login-right h3 {
     font-size: 34px;
   }
-
 }
 
 @media only screen and (min-width: 320px) and (max-width: 479px) {
-
   .login-right {
     margin-top: 109px;
   }
@@ -440,20 +406,13 @@ body {
     margin: 0 auto;
     margin-top: 16px;
   }
-
-
 }
-
-
-
 
 /* Media Screen Register*/
 @media screen and (max-width: 1469px) {
-
   .container__register {
     justify-content: space-between;
     padding-right: 10em;
-
   }
 }
 
@@ -461,7 +420,6 @@ body {
   .container__register {
     justify-content: space-between;
     padding-right: 6em;
-
   }
 }
 
@@ -469,7 +427,6 @@ body {
   .container__register {
     justify-content: space-between;
     padding-right: 2em;
-
   }
 }
 
@@ -482,7 +439,6 @@ body {
   .left-side {
     display: none;
   }
-
 }
 
 @media screen and (max-width: 1816px) {
@@ -492,7 +448,6 @@ body {
 }
 
 @media screen and (max-width: 619px) {
-
   .container__register {
     justify-content: none;
   }
@@ -504,7 +459,6 @@ body {
   .form {
     flex-direction: column;
     width: 100%;
-
   }
 
   .form fieldset {
@@ -517,7 +471,6 @@ body {
   .field-pass {
     width: 312px;
     margin-left: 0px;
-
   }
 
   .field-lastname {
@@ -541,7 +494,6 @@ body {
     margin-left: 2px;
     margin-bottom: 56px;
     width: 312px;
-
   }
 
   .button-lg {

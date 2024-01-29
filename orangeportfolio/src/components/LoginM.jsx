@@ -1,8 +1,10 @@
-import CadastroImg from "../assets/img/img_cadastro.png";
+import Login from "../Login";
+import LoginImg from "../assets/img/imglogin.png";
+import FormLoginM from "./FormLoginM";
 import FormRegisterM from "./FormRegisterM";
 import { Box, Container, useMediaQuery, useTheme } from "@mui/material";
 
-function Register() {
+function LoginM() {
   const theme = useTheme();
   const isWideScreen = useMediaQuery(theme.breakpoints.up("lg"));
   return (
@@ -18,9 +20,7 @@ function Register() {
           },
         }}
       >
-        {isWideScreen && (
-          <img src={CadastroImg} alt="" style={{ width: "40%" }} />
-        )}
+        {isWideScreen && <img src={LoginImg} alt="" style={{ width: "40%" }} />}
 
         <Box
           sx={{
@@ -33,10 +33,10 @@ function Register() {
             },
           }}
         >
-          <FormRegisterM />
+          <FormLoginM />
         </Box>
       </Box>
     </Container>
   );
 }
-export default Register;
+export default LoginM;

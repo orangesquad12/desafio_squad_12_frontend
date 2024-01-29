@@ -1,10 +1,12 @@
 import React from "react";
 import StateTextFields from "./DoubleTextFieldM";
-import { TextField, useMediaQuery, useTheme } from "@mui/material";
+import { TextField, useMediaQuery, useTheme, Link } from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
 import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
+import Googlebtn from "../assets/img/googlebtn.png";
+
 const Title = styled.h1`
     font-family: Roboto;
     font-size: 48px;
@@ -13,23 +15,28 @@ const Title = styled.h1`
     line-height: 40px; /;
     color: #222244;
     text-align:center;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     @media (max-width: 592px) {
-      font-size: 30px;
+      font-size: 24px;
       line-height: 24px;
   }
 `;
-
+const Google = styled.a`
+  margin: 0 auto;
+  margin-bottom: 32px;
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-function FormRegister() {
+function FormLoginM() {
   return (
     <Container>
-      <Title>Cadastre-se</Title>
-      <StateTextFields />
+      <Title>Entre no Orange Portfólio</Title>
+      <Google href="#">
+        <img src={Googlebtn} alt="Imagem Login" />
+      </Google>
       <TextField
         sx={{
           width: "517px",
@@ -65,9 +72,21 @@ function FormRegister() {
           ),
         }}
       />
-      <ButtonLargerM>CADASTRAR</ButtonLargerM>
+      <ButtonLargerM>ENTRAR</ButtonLargerM>
+      <Link
+        href="#"
+        underline="none"
+        sx={{
+          color: "#818388",
+          marginLeft: "10px",
+          marginTop: "18px",
+        }}
+      >
+        {" "}
+        Cadastre-se
+      </Link>
     </Container>
   );
 }
 
-export default FormRegister;
+export default FormLoginM;

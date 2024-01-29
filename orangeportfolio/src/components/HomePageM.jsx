@@ -1,5 +1,5 @@
 import ResponsiveAppBar from "./AppBarM";
-import { Container,Typography, Box } from "@mui/material";
+import { Container,Typography, Box,TextField } from "@mui/material";
 import Avatar from "../assets/img/Avatar.png"
 import AddProject from "../Modal";
 
@@ -28,8 +28,30 @@ function HomePageM(){
                     Camila Soares
                 </Typography>
                 <AddProject/>
+                
             </Box>
         </Container>
+        <Box sx={{marginTop:'100px',
+        marginLeft:'30px'}}>
+            <Typography sx={{fontFamily:'Roboto',
+                    fontSize:'24px',
+                    
+                    marginLeft:'10px',
+                    lineHeight:'60px'}}>
+                    Meus Projetos
+                </Typography>
+            <TextField
+                sx={{
+                width: "517px",
+                m: 1,
+                mb: "16px",
+                "@media (max-width: 592px)": {
+                    width: "312px",
+                    mb: "16px",
+                  },}}
+        label="Buscar Tags"
+        />
+        </Box>
        </div>
     )
 }

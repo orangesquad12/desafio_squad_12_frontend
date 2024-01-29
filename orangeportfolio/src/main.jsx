@@ -10,12 +10,13 @@ import RegisterM from "./components/RegisterM.jsx";
 import FormLoginM from "./components/FormLoginM.jsx";
 import AddProject from "./Modal.jsx";
 import LoginM from "./components/LoginM.jsx";
+import AppBar from "./components/AppBarM.jsx"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
       {/* <AddProject /> */}
-      <LoginM />
+      <AppBar/>
       {/* <FormLoginM /> */}
       {/* <RegisterM /> */}
     </div>

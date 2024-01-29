@@ -1,7 +1,7 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import ImageIcon from "@mui/icons-material/Image";
 
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
@@ -16,19 +16,34 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const OrangeButton = styled(Button)({
-  background: "linear-gradient(#FF8833, #FF5522)",
+const UploadText = styled("span")({
+  textTransform: "none",
+  color: "#333",
+});
+
+const UploadFile = styled(Button)({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  width: "400px",
+  height: "330px",
+  background: "#E6E9F2",
+  color: "000",
+  "&:hover": {
+    background: "#DFDFDF",
+  },
+});
+
+const ImageIconCustom = styled(ImageIcon)({
+  color: "#323232",
 });
 
 export default function InputFileUpload() {
   return (
-    <OrangeButton
-      component="label"
-      variant="contained"
-      startIcon={<CloudUploadIcon />}
-    >
-      Salvar
+    <UploadFile component="label" variant="contained">
+      <ImageIconCustom />
+      <UploadText>Compartilhe seu talento com milhares de pessoas</UploadText>
       <VisuallyHiddenInput type="file" />
-    </OrangeButton>
+    </UploadFile>
   );
 }

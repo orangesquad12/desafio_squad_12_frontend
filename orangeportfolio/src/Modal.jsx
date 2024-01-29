@@ -20,9 +20,27 @@ const style = {
   p: 4,
 };
 
+const txtStyleSpace = {
+  display: "flex",
+  flexDirection: "column",
+  gap: "16px",
+  marginTop: "16px",
+};
+const formStyle = {
+  display: "flex",
+  flexDirection: "row",
+  gap: "16px",
+};
+
 const position = {
   display: "flex",
   gap: "16px",
+};
+
+const cancelarbtn = {
+  "&:hover": {
+    backgroundColor: "#C1B3B3",
+  },
 };
 
 export default function AddProject() {
@@ -50,56 +68,77 @@ export default function AddProject() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ color: "#515255" }}
+          >
             Adicionar Projeto
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Selecione o conteúdo que você deseja fazer upload
-          </Typography>
-          <div>
-            <InputFileUpload />
+          <div style={formStyle}>
+            <div style={txtStyleSpace}>
+              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                Selecione o conteúdo que você deseja fazer upload
+              </Typography>
+              <InputFileUpload />
+            </div>
+            <div style={txtStyleSpace}>
+              <TextField
+                sx={{ width: 413 }}
+                id="outlined-basic"
+                label="Título"
+                variant="outlined"
+              />
+              <TextField
+                sx={{ width: 413 }}
+                id="outlined-basic"
+                label="Tags"
+                variant="outlined"
+              />
+              <TextField
+                sx={{ width: 413 }}
+                id="outlined-basic"
+                label="Link"
+                variant="outlined"
+              />
+              <TextField
+                id="outlined-multiline-static"
+                label="Descrição"
+                multiline
+                rows={6}
+              />
+              <Link
+                href="#"
+                underline="none"
+                sx={{
+                  color: "#515255",
+                }}
+              >
+                {" "}
+              </Link>
+            </div>
           </div>
-          <TextField
-            sx={{ width: 413 }}
-            id="outlined-basic"
-            label="Título"
-            variant="outlined"
-          />
-          <TextField
-            sx={{ width: 413 }}
-            id="outlined-basic"
-            label="Tags"
-            variant="outlined"
-          />
-          <TextField
-            sx={{ width: 413 }}
-            id="outlined-basic"
-            label="Link"
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-multiline-static"
-            label="Descrição"
-            multiline
-            rows={4}
-          />
-          <Link
-            href="#"
-            underline="none"
-            sx={{
-              color: "#515255",
-            }}
-          >
-            {" "}
-            Cadastre-se
-          </Link>
           <div>
+            <Link
+              href="#"
+              underline="none"
+              sx={{
+                color: "#515255",
+                fontWeight: "400",
+                marginBottom: "16px",
+              }}
+            >
+              {" "}
+              Visualizar Publicação
+            </Link>
             <Box sx={position}>
               <Button
                 variant="contained"
                 size="medium"
                 sx={{
                   display: "block",
+                  marginTop: "16px",
                   width: "101px",
                   height: "42px",
                   background: "linear-Gradient(#FF8833, #FF5522)",
@@ -107,19 +146,24 @@ export default function AddProject() {
               >
                 SALVAR
               </Button>
-              <Button
-                variant="contained"
-                size="medium"
-                sx={{
-                  display: "block",
-                  width: "101px",
-                  height: "42px",
-                  color: "#3A3A3A",
-                  backgroundColor: "#DFDFDF",
-                }}
-              >
-                SALVAR
-              </Button>
+
+              <div>
+                <Button
+                  variant="contained"
+                  size="medium"
+                  sx={{
+                    display: "block",
+                    marginTop: "16px",
+                    width: "101px",
+                    height: "42px",
+                    color: "#3A3A3A",
+                    backgroundColor: "#DFDFDF",
+                    ...cancelarbtn,
+                  }}
+                >
+                  CANCELAR
+                </Button>
+              </div>
             </Box>
           </div>
         </Box>

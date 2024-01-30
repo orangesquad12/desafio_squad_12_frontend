@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StateTextFields from "./DoubleTextFieldM";
 import { TextField, useMediaQuery, useTheme, Link } from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
@@ -21,6 +21,11 @@ const Title = styled.h1`
       line-height: 24px;
   }
 `;
+
+const EyeIcon = styled.div`
+  cursor: pointer;
+`;
+
 const Google = styled.a`
   margin: 0 auto;
   margin-bottom: 32px;
@@ -31,6 +36,12 @@ const Container = styled.div`
 `;
 
 function FormLoginM() {
+  const [showPass, setShowPass] = useState(false);
+
+  const togglePass = () => {
+    setShowPass(!showPass);
+  };
+
   return (
     <Container>
       <Title>Entre no Orange Portfólio</Title>
@@ -64,11 +75,14 @@ function FormLoginM() {
           },
         }}
         label="Password"
+        type={showPass ? "text" : "password"}
         InputProps={{
           endAdornment: (
-            <InputAdornment position="end">
-              <RemoveRedEyeIcon />
-            </InputAdornment>
+            <EyeIcon>
+              <InputAdornment position="end" onClick={togglePass}>
+                <RemoveRedEyeIcon />
+              </InputAdornment>
+            </EyeIcon>
           ),
         }}
       />

@@ -11,14 +11,14 @@ import FormLoginM from "./components/FormLoginM.jsx";
 import AddProject from "./Modal.jsx";
 import LoginM from "./components/LoginM.jsx";
 import AppBar from "./components/AppBarM.jsx";
-import HomePageM from "./components/HomePageM.jsx"
+import HomePageM from "./components/HomePageM.jsx";
 import ProjectListM from "./components/ProjectListM.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
-      <HomePageM/>
-      {/* <FormLoginM /> */}
+      {/* <HomePageM/> */}
+      <LoginM />
       {/* <RegisterM /> */}
     </div>
   </React.StrictMode>

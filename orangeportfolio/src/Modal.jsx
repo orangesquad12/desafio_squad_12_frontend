@@ -14,9 +14,11 @@ const style = {
   left: "50%",
   gap: "16px",
   transform: "translate(-50%, -50%)",
-  width: 890,
+  width: "890",
+
   bgcolor: "#FEFEFE",
   boxShadow: 24,
+
   p: 4,
 };
 

@@ -151,6 +151,7 @@ export default function AddProject() {
                 <Button
                   variant="contained"
                   size="medium"
+                  onClick={handleClose}
                   sx={{
                     display: "block",
                     marginTop: "16px",

@@ -15,6 +15,7 @@ import AdbIcon from '@mui/icons-material/Adb';
 import LogoOrange from '../assets/img/LogoOrange.png'
 import styled from 'styled-components';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { Link }from 'react-router-dom'
 
 const pages = ['Meus Projetos', 'Descobrir'];
 const settings = ['Logout'];
@@ -77,7 +78,10 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                 <Link to={page === 'Meus Projetos' ? '/portfolio' : '/descobrir'} 
+                 style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <Typography textAlign="center">{page}</Typography>
+                  </Link> 
                 </MenuItem>
               ))}
             </Menu>
@@ -104,6 +108,8 @@ function ResponsiveAppBar() {
                 {pages.map((page) => (
                 <Button
                     key={page}
+                    component={Link}
+                    to={page === 'Meus Projetos' ? '/portfolio' : '/descobrir'}
                     onClick={handleCloseNavMenu}
                     sx={{ my: 2, color: 'white', display: 'block',textTransform:'none', fontSize:'20px' }}
                 >
@@ -135,7 +141,10 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Link to={"/"} 
+                    style={{ textDecoration: 'none', color: 'inherit' }}>                  
+                    <Typography textAlign="center">{setting}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>

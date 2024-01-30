@@ -13,13 +13,13 @@ import LoginM from "./components/LoginM.jsx";
 import AppBar from "./components/AppBarM.jsx";
 import HomePageM from "./components/HomePageM.jsx";
 import ProjectListM from "./components/ProjectListM.jsx";
+import App from "./routes/App.jsx"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
       {/* <AddProject /> */}
-      <HomePageM />
-      {/* <LoginM /> */}
+      <App/> 
       {/* <RegisterM /> */}
     </div>
   </React.StrictMode>

@@ -18,8 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
       {/* <HomePageM/> */}
-      <LoginM />
-      {/* <RegisterM /> */}
+      {/* <LoginM /> */}
+      <RegisterM />
     </div>
   </React.StrictMode>
 );

@@ -2,6 +2,7 @@ import ResponsiveAppBar from "./AppBarM";
 import { Container,Typography, Box,TextField } from "@mui/material";
 import Avatar from "../assets/img/Avatar.png"
 import AddProject from "../Modal";
+import ProjectListM from "./ProjectListM";
 
 function HomePageM(){
     return(
@@ -52,6 +53,7 @@ function HomePageM(){
         label="Buscar Tags"
         />
         </Box>
+        <ProjectListM/>
        </div>
     )
 }

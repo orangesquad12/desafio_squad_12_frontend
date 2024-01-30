@@ -12,7 +12,7 @@ import AddProject from "./Modal.jsx";
 import LoginM from "./components/LoginM.jsx";
 import AppBar from "./components/AppBarM.jsx";
 import HomePageM from "./components/HomePageM.jsx"
-
+import ProjectListM from "./components/ProjectListM.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

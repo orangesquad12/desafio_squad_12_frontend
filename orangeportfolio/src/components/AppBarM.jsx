@@ -17,7 +17,7 @@ import styled from 'styled-components';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const pages = ['Meus Projetos', 'Descobrir'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);

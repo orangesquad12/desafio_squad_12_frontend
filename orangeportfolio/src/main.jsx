@@ -17,9 +17,10 @@ import ProjectListM from "./components/ProjectListM.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
-      {/* <HomePageM/> */}
+      {/* <AddProject /> */}
+      <HomePageM />
       {/* <LoginM /> */}
-      <RegisterM />
+      {/* <RegisterM /> */}
     </div>
   </React.StrictMode>
 );

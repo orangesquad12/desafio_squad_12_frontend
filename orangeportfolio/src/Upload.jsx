@@ -38,12 +38,24 @@ const ImageIconCustom = styled(ImageIcon)({
   color: "#323232",
 });
 
-export default function InputFileUpload() {
+export default function InputFileUpload({ onChange }) {
+  const handleChangeFile = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageDataUrl = reader.result;
+        onChange(imageDataUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
     <UploadFile component="label" variant="contained">
       <ImageIconCustom />
+
       <UploadText>Compartilhe seu talento com milhares de pessoas</UploadText>
-      <VisuallyHiddenInput type="file" />
+      <VisuallyHiddenInput type="file" onChange={handleChangeFile} />
     </UploadFile>
   );
 }

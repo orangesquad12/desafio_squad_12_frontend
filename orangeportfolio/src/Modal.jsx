@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { TextField, Link } from "@mui/material";
@@ -14,8 +14,8 @@ const style = {
   left: "50%",
   gap: "16px",
   transform: "translate(-50%, -50%)",
-  width: "890",
-
+  width: "100%",
+  maxWidth: "890px",
   bgcolor: "#FEFEFE",
   boxShadow: 24,
 
@@ -47,8 +47,13 @@ const cancelarbtn = {
 
 export default function AddProject() {
   const [open, setOpen] = React.useState(false);
+  const [uploadImg, setUploadImg] = React.useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleChangeImg = (imgDataUrl) => {
+    setUploadImg(imgDataUrl);
+  };
 
   return (
     <div>
@@ -80,14 +85,24 @@ export default function AddProject() {
           </Typography>
           <div style={formStyle}>
             <div style={txtStyleSpace}>
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                Selecione o conteúdo que você deseja fazer upload
-              </Typography>
-              <InputFileUpload />
+              {uploadImg ? (
+                <img
+                  src={uploadImg}
+                  alt="Imagem Selecionada"
+                  style={{ maxWidth: "100%", height: "380px" }}
+                />
+              ) : (
+                <>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Selecione o conteúdo que você deseja fazer upload
+                  </Typography>
+                  <InputFileUpload onChange={handleChangeImg} />
+                </>
+              )}
             </div>
             <div style={txtStyleSpace}>
               <TextField
-                sx={{ width: 413 }}
+                sx={{ width: "100%" }}
                 id="outlined-basic"
                 label="Título"
                 variant="outlined"
@@ -134,6 +149,7 @@ export default function AddProject() {
               {" "}
               Visualizar Publicação
             </Link>
+            <div></div>
             <Box sx={position}>
               <Button
                 variant="contained"

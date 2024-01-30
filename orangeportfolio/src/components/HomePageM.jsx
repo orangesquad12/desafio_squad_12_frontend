@@ -50,7 +50,6 @@ function HomePageM() {
           sx={{
             fontFamily: "Roboto",
             fontSize: "24px",
-
             marginLeft: "10px",
             lineHeight: "60px",
           }}

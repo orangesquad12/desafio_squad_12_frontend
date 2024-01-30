@@ -1,4 +1,3 @@
-import Login from "../Login";
 import LoginImg from "../assets/img/imglogin.png";
 import FormLoginM from "./FormLoginM";
 import FormRegisterM from "./FormRegisterM";

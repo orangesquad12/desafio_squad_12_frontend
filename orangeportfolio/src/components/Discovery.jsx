@@ -1,7 +1,7 @@
-import AppBarM from "./AppBarM"
+import AppBarM from "./AppBarM";
 
-function Discovery(){
-    return(
-       <AppBarM/>
-    )
-}export default Discovery
+function Discovery() {
+  return <AppBarM />;
+}
+
+export default Discovery;

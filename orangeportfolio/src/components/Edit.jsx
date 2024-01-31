@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Tooltip, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { Link } from 'react-router-dom';
+import ModalEdit from './ModalEdit'
 
-const editOptions = ['Editar', 'Excluir'];
+const editOptions = [<ModalEdit/>, 'Excluir'];
 
 function Edit() {
     const [anchorEl, setAnchorEl] = useState(null);

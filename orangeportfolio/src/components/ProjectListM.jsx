@@ -9,7 +9,15 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip  key="1" 
+                label="UX" 
+                />, 
+                <Chip  sx={{
+                    '& .MuiChip-label': {
+                        padding:"8px",
+                    },
+                    }}key="2" label="Web" 
+                 />],
         thumb: transferirImage,
         
     },
@@ -18,7 +26,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip key="1" label="UX"  />, <Chip sx={{
+            '& .MuiChip-label': {
+                padding:"8px",
+            },
+            }} key="2" label="web"  />],
         thumb: transferirImage,
     },
     {
@@ -26,7 +38,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
+            '& .MuiChip-label': {
+                padding:"8px",
+            },
+            }} key="2" label="web"/>],
         thumb: transferirImage,
     },
     {
@@ -34,7 +50,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip key="1" label="UX" />, <Chip sx={{   
+            '& .MuiChip-label': {
+                padding:"8px",
+            },
+            }} key="2" label="web" />],
         thumb: transferirImage, 
     },
     {
@@ -42,7 +62,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
+            '& .MuiChip-label': {
+                padding:"8px",
+            },
+            }} key="2" label="web" />],
         thumb: transferirImage,
     },
     {
@@ -50,7 +74,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip key="2" label="web" />],
+        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
+            '& .MuiChip-label': {
+                padding:"8px",
+            },
+            }} key="2" label="web" />],
         thumb: transferirImage,
     }
 ]
@@ -80,23 +108,22 @@ function ProjectList() {
                                         <img
                                             src={item.avatar} 
                                             style={{borderRadius:'50%',
-                                            width:'24px',
-                                            height:'24px',
+                                            width:'2rem',
+                                            height:'2rem',
                                             }}/>
                                         <Typography 
                                             sx={{
                                                 fontFamily: 'Roboto',
-                                                fontSize: '16px',
-                                                fontStyle: 'normal',
+                                                fontSize: '.8em',
                                                 fontWeight: 400,
                                                 lineHeight: '16px',
                                                 letterSpacing: '0.15px',
                                             
                                         }}>{item.title}</Typography>
                                 </Box>
-                                <Box>
-                                    {item.tag}
-                                </Box>
+                                <Box sx={{
+                                }}>
+                                   {item.tag}                                </Box>
                             </Box> 
                         </Box> 
                     </Grid>

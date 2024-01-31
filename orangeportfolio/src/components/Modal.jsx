@@ -5,10 +5,48 @@ import { TextField, Link } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import InputFileUpload from "./Upload";
+import Grid from "@mui/material/Grid";
+import Chip from "@mui/material/Chip";
+import Avatar from "../assets/img/Avatar.png";
+import transferirImage from "../assets/img/img_projeto.png";
 
 const style = {
   display: "flex",
   flexDirection: "column",
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  gap: "16px",
+  transform: "translate(-50%, -50%)",
+  width: "100%",
+  maxWidth: "890px",
+  bgcolor: "#FEFEFE",
+  boxShadow: 24,
+
+  p: 4,
+};
+
+const projects = [
+  {
+    id: 1,
+    avatar: Avatar,
+    title: "Ecommerce One Page",
+    tag: [<Chip key="1" label="UX" />, <Chip key="2" label="Web" />],
+    thumb: transferirImage,
+    author: "Camila Soares",
+    date: "12/12",
+    description:
+      "Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce.",
+
+    subtitle: "Download",
+    link: "https://gumroad.com/products/wxCSL",
+  },
+];
+
+const modalProjectAdd = {
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -47,9 +85,12 @@ const cancelarbtn = {
 
 export default function AddProject() {
   const [open, setOpen] = React.useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleViewModalOpen = () => setViewModalOpen(true);
+  const handleViewModalClose = () => setViewModalOpen(false);
 
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
@@ -145,6 +186,7 @@ export default function AddProject() {
                 fontWeight: "400",
                 marginBottom: "16px",
               }}
+              onClick={handleViewModalOpen}
             >
               {" "}
               Visualizar Publicação
@@ -185,6 +227,147 @@ export default function AddProject() {
               </div>
             </Box>
           </div>
+          <Modal
+            open={viewModalOpen}
+            onClose={handleViewModalClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={modalProjectAdd}>
+              <Grid container spacing={2}>
+                {projects.map((project) => (
+                  <Grid item xs={12} sm={4} key={project.id}>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                          }}
+                        >
+                          <img
+                            src={project.avatar}
+                            alt={project.title}
+                            style={{
+                              borderRadius: "50%",
+                              width: "64px",
+                              height: "64px",
+                            }}
+                          />
+
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              alignItems: "center",
+                              marginTop: "8px",
+                            }}
+                          >
+                            <Typography
+                              sx={{
+                                fontSize: "16",
+                                color: "#515255",
+                              }}
+                            >
+                              {project.author}
+                            </Typography>
+                            <Typography
+                              sx={{
+                                fontSize: "16",
+                                color: "#515255",
+                                marginTop: "4px",
+                              }}
+                            >
+                              {project.date}
+                            </Typography>
+                          </div>
+                        </div>
+                        <img
+                          src={project.thumb}
+                          alt="Projeto Adicionado"
+                          style={{
+                            marginTop: "16px",
+                            width: "100%",
+                            height: "auto",
+                          }}
+                        />
+
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            marginTop: "16px",
+                            marginLeft: "16px",
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: "16",
+                              color: "#515255",
+                              marginBottom: "8px",
+                            }}
+                          >
+                            {project.description}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "16",
+                              color: "#515255",
+                              marginBottom: "8px",
+                            }}
+                          >
+                            {project.subtitle}
+                          </Typography>
+                          <Typography sx={{ fontSize: "16", color: "#515255" }}>
+                            {project.link}
+                          </Typography>
+                        </Box>
+                      </div>
+                    </div>
+                  </Grid>
+                ))}
+
+                {projects.map((project) => (
+                  <Grid item xs={12} sm={4} key={project.id}>
+                    <Typography sx={{ fontSize: "24" }}>
+                      {project.title}
+                    </Typography>
+                  </Grid>
+                ))}
+
+                {projects.map((project) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={4}
+                    container
+                    spacing={2}
+                    key={project.id}
+                  >
+                    {project.tag.map((tag, index) => (
+                      <Grid item xs={3} key={index}>
+                        {tag}
+                      </Grid>
+                    ))}
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
+          </Modal>
         </Box>
       </Modal>
     </div>

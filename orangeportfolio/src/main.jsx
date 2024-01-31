@@ -7,7 +7,7 @@ import Edit from "./components/Edit.jsx"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <div style={{ height: "100vh" }}>
-      <Edit/>
+      <App/>
     </div>
   </React.StrictMode>
 );

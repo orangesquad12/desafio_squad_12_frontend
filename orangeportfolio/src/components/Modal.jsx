@@ -18,8 +18,7 @@ const style = {
   left: "50%",
   gap: "16px",
   transform: "translate(-50%, -50%)",
-  width: "100%",
-  maxWidth: "890px",
+  height: "auto",
   bgcolor: "#FEFEFE",
   boxShadow: 24,
 
@@ -44,16 +43,12 @@ const projects = [
 ];
 
 const modalProjectAdd = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
   position: "absolute",
   top: "50%",
   left: "50%",
-  gap: "16px",
   transform: "translate(-50%, -50%)",
-  width: "100%",
-  maxWidth: "890px",
+  width: "auto",
+  height: "auto",
   bgcolor: "#FEFEFE",
   boxShadow: 24,
 
@@ -234,9 +229,15 @@ export default function AddProject() {
             aria-describedby="modal-modal-description"
           >
             <Box sx={modalProjectAdd}>
-              <Grid container spacing={2}>
+              <div>
                 {projects.map((project) => (
-                  <Grid item xs={12} sm={4} key={project.id}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
                     <div
                       style={{
                         display: "flex",
@@ -251,10 +252,10 @@ export default function AddProject() {
                           alignItems: "center",
                         }}
                       >
-                        <div
-                          style={{
+                        <Box
+                          sx={{
                             display: "flex",
-                            flexDirection: "column",
+                            gap: "20px",
                             alignItems: "center",
                           }}
                         >
@@ -267,23 +268,14 @@ export default function AddProject() {
                               height: "64px",
                             }}
                           />
-
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "column",
-                              alignItems: "center",
-                              marginTop: "8px",
+                          <Typography
+                            sx={{
+                              fontSize: "1rem",
+                              color: "#515255",
+                              marginLeft: "10px",
                             }}
                           >
-                            <Typography
-                              sx={{
-                                fontSize: "16",
-                                color: "#515255",
-                              }}
-                            >
-                              {project.author}
-                            </Typography>
+                            {project.author}
                             <Typography
                               sx={{
                                 fontSize: "16",
@@ -293,79 +285,81 @@ export default function AddProject() {
                             >
                               {project.date}
                             </Typography>
-                          </div>
-                        </div>
-                        <img
-                          src={project.thumb}
-                          alt="Projeto Adicionado"
-                          style={{
-                            marginTop: "16px",
-                            width: "100%",
-                            height: "auto",
-                          }}
-                        />
+                          </Typography>
+                          {projects.map((project) => (
+                            <Typography
+                              sx={{ fontSize: "1.5rem", margin: "0 50px" }}
+                            >
+                              {project.title}
+                            </Typography>
+                          ))}
+                          {projects.map((project) => (
+                            <Box sx={{ display: "flex", gap: "5px" }}>
+                              {project.tag.map((tag, index) => (
+                                <Box item xs={3} key={index}>
+                                  {tag}
+                                </Box>
+                              ))}
+                            </Box>
+                          ))}
+                        </Box>
 
-                        <Box
-                          sx={{
+                        <div
+                          style={{
                             display: "flex",
                             flexDirection: "column",
-                            alignItems: "flex-start",
-                            marginTop: "16px",
-                            marginLeft: "16px",
+                            alignItems: "center",
+                            marginTop: "8px",
+                          }}
+                        ></div>
+                      </div>
+                      <img
+                        src={project.thumb}
+                        alt="Projeto Adicionado"
+                        style={{
+                          marginTop: "16px",
+                          width: "100%",
+                          height: "auto",
+                        }}
+                      />
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          marginTop: "16px",
+                          marginLeft: "16px",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            fontSize: "1rem",
+                            color: "#515255",
+                            marginBottom: "8px",
                           }}
                         >
-                          <Typography
-                            sx={{
-                              fontSize: "16",
-                              color: "#515255",
-                              marginBottom: "8px",
-                            }}
-                          >
-                            {project.description}
-                          </Typography>
-                          <Typography
-                            sx={{
-                              fontSize: "16",
-                              color: "#515255",
-                              marginBottom: "8px",
-                            }}
-                          >
-                            {project.subtitle}
-                          </Typography>
-                          <Typography sx={{ fontSize: "16", color: "#515255" }}>
-                            {project.link}
-                          </Typography>
-                        </Box>
-                      </div>
+                          {project.description}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            fontSize: "16",
+                            color: "#515255",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          {project.subtitle}
+                        </Typography>
+                        <Typography
+                          sx={{ fontSize: "0.7rem", color: "#515255" }}
+                        >
+                          {project.link}
+                        </Typography>
+                      </Box>
                     </div>
-                  </Grid>
+                  </div>
                 ))}
-
-                {projects.map((project) => (
-                  <Grid item xs={12} sm={4} key={project.id}>
-                    <Typography sx={{ fontSize: "24" }}>
-                      {project.title}
-                    </Typography>
-                  </Grid>
-                ))}
-
-                {projects.map((project) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={4}
-                    container
-                    spacing={2}
-                    key={project.id}
-                  >
-                    {project.tag.map((tag, index) => (
-                      <Grid item xs={3} key={index}>
-                        {tag}
-                      </Grid>
-                    ))}
-                  </Grid>
-                ))}
-              </Grid>
+              </div>
             </Box>
           </Modal>
         </Box>

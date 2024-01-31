@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import StateTextFields from "./DoubleTextFieldM";
-import { TextField, useMediaQuery, useTheme, Link } from "@mui/material";
+import { TextField, useMediaQuery, useTheme} from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
 import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
-import Googlebtn from "../assets/img/googlebtn.png";
+import Googlebtn from "../assets/img/googlebtn.png"
+import { Link } from "react-router-dom";
 
 const Title = styled.h1`
     font-family: Roboto;
@@ -88,12 +89,12 @@ function FormLoginM() {
       />
       <ButtonLargerM>ENTRAR</ButtonLargerM>
       <Link
-        href="#"
-        underline="none"
-        sx={{
+        to={"/cadastro"}
+        style={{
           color: "#818388",
           marginLeft: "10px",
           marginTop: "18px",
+          textDecoration: "none"
         }}
       >
         {" "}

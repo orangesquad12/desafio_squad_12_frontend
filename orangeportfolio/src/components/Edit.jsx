@@ -20,11 +20,11 @@ function Edit() {
         <div>
             <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenMenu}>
-                    <EditIcon sx={{ borderRadius: '50%', background: '#FFCC99', padding: '3px', fontSize: 'medium', color: '#303133', mt:'25px'}} />
+                    <EditIcon sx={{ borderRadius: '50%', background: '#FFCC99', padding: '3px', fontSize: 'medium', color: '#303133'}} />
                 </IconButton>
             </Tooltip>
             <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '35px'}}
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{

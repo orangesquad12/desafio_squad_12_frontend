@@ -1,6 +1,7 @@
 import { Box, Typography, Toolbar, Grid, Chip} from "@mui/material"
 import transferirImage from '../assets/img/img_projeto.png'
 import Avatar from  '../assets/img/Avatar.png'
+import Edit from "./Edit"
 
 const projects = [
     {
@@ -64,10 +65,16 @@ function ProjectList() {
                 projects.map((item,index) =>(
                     <Grid item key={item.id} lg={3} md={4} sm={6} xs={12} justifyContent='center'>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img 
-                            src={item.thumb} 
-                            alt={item.title}
-                            style={{maxWidth:'100%', width:'100%'}}/>
+                            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+                                <img 
+                                    src={item.thumb} 
+                                    alt={item.title}
+                                    style={{ maxWidth: '100%', width: '100%' }} 
+                                />
+                                <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
+                                    <Edit />
+                                </Box>
+                            </div>                          
                             <Box sx={{width:'100%', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between',marginTop:'10px', maxHeight: '50px'}}>
                                 <Box sx={{display:'flex',flexDirection:'row',alignItems:'center',}}>
                                         <img

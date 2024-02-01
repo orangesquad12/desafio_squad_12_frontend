@@ -8,37 +8,28 @@ import InputFileUpload from "./Upload";
 
 const style = {
   display: "flex",
-  flexDirection: "column",
-  position: "absolute",
+  position: "relative",
   top: "50%",
   left: "50%",
   gap: "16px",
   transform: "translate(-50%, -50%)",
-  width: "100%",
-  maxWidth: "890px",
+  maxWidth:"890px",
   bgcolor: "#FEFEFE",
   boxShadow: 24,
-
   p: 4,
-};
+  "@media screen and (max-width: 740px)": {
+   display: "flex",
+   flexDirection: "column-reverse",
+   width: "80%",
+   maxHeight: "80vh", 
+   overflowY: "auto",
+   '.editOne': {
+    display:"none"
+}
 
-const txtStyleSpace = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "16px",
-  marginTop: "16px",
+  }
+  
 };
-const formStyle = {
-  display: "flex",
-  flexDirection: "row",
-  gap: "16px",
-};
-
-const position = {
-  display: "flex",
-  gap: "16px",
-};
-
 const cancelarbtn = {
   "&:hover": {
     backgroundColor: "#C1B3B3",
@@ -66,123 +57,145 @@ export default function AddProject() {
       >
         Editar
       </Button>
+      
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+        
         <Box sx={style}>
+        
+          {/* box-left*/}
+          <Box >
           <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            sx={{ color: "#515255" }}
-          >
-           Editar Projeto
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                sx={{ color: "#515255", textAlign:"center",
+                "&.editOne": {
+                }
+                }}
+                className="editOne"
+                >
+                Editar Projeto
           </Typography>
-          <div style={formStyle}>
-            <div style={txtStyleSpace}>
+              <Typography id="modal-modal-description" sx={{ marginTop:'1px'}}>
+                    Selecione o conteúdo que você deseja fazer upload
+              </Typography>
               {uploadImg ? (
                 <img
                   src={uploadImg}
                   alt="Imagem Selecionada"
-                  style={{ maxWidth: "100%", height: "380px" }}
+                  style={{ maxWidth: "100%", height: "380px", marginTop:'3px' }}
                 />
               ) : (
                 <>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Selecione o conteúdo que você deseja fazer upload
-                  </Typography>
                   <InputFileUpload onChange={handleChangeImg} />
                 </>
               )}
-            </div>
-            <div style={txtStyleSpace}>
+              <Link
+               underline="none"
+              sx={{
+                color: "#515255",
+                fontFamily:"Roboto"
+                
+              }}
+            >
+              {" "}
+              Visualizar Publicação
+            </Link>
+            <Box sx={{display:'flex', flexDirection:"row"}}>
+              <Button
+                variant="contained"
+                size="medium"
+                sx={{
+                  marginTop: "10px",
+                  marginRight:"10px",
+                  width: "7rem",
+                  height: "2.7rem",
+                  background: "linear-Gradient(#FF8833, #FF5522)",
+                }}
+                >
+                  SALVAR
+                  </Button>
+                  <Button
+                  variant="contained"
+                  size="medium"
+                  onClick={handleClose}
+                  sx={{
+                    marginTop: "10px",
+                    width: "7rem",
+                    height: "2.7rem",
+                    color: "#3A3A3A",
+                    backgroundColor: "#DFDFDF",
+                    ...cancelarbtn,
+                  }}
+                  >
+                    CANCELAR
+                  </Button>
+               </Box>
+          </Box>
+          {/* box-right*/}
+          <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              mt: '5%',
+              "@media screen and (max-width: 740px)": {
+                  width: "90%",
+                  marginLeft: "20px",
+                  '.editProject': {
+                    display:"inline"
+                }
+
+              },
+           }}>
+              <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{
+                color: "#515255",
+                textAlign: "center",
+                marginBottom: "20px",
+                "&.editProject": {
+                display: "none"
+              }
+            }}
+            className="editProject"
+            >
+              Editar Projeto
+            </Typography>
               <TextField
-                sx={{ width: "100%" }}
                 id="outlined-basic"
                 label="Título"
                 variant="outlined"
+                sx={{marginBottom:'20px'}}
               />
               <TextField
-                sx={{ width: 413 }}
+                
                 id="outlined-basic"
                 label="Tags"
                 variant="outlined"
+                sx={{marginBottom:'20px'}}
               />
               <TextField
-                sx={{ width: 413 }}
+
                 id="outlined-basic"
                 label="Link"
                 variant="outlined"
+                sx={{marginBottom:'20px'}}
               />
               <TextField
                 id="outlined-multiline-static"
                 label="Descrição"
                 multiline
                 rows={6}
+                sx={{marginBottom:'20px'}}
               />
-              <Link
-                href="#"
-                underline="none"
-                sx={{
-                  color: "#515255",
-                }}
-              >
-                {" "}
-              </Link>
-            </div>
-          </div>
-          <div>
-            <Link
-              href="#"
-              underline="none"
-              sx={{
-                color: "#515255",
-                fontWeight: "400",
-                marginBottom: "16px",
-              }}
-            >
-              {" "}
-              Visualizar Publicação
-            </Link>
-            <div></div>
-            <Box sx={position}>
-              <Button
-                variant="contained"
-                size="medium"
-                sx={{
-                  display: "block",
-                  marginTop: "16px",
-                  width: "101px",
-                  height: "42px",
-                  background: "linear-Gradient(#FF8833, #FF5522)",
-                }}
-              >
-                SALVAR
-              </Button>
-
-              <div>
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={handleClose}
-                  sx={{
-                    display: "block",
-                    marginTop: "16px",
-                    width: "101px",
-                    height: "42px",
-                    color: "#3A3A3A",
-                    backgroundColor: "#DFDFDF",
-                    ...cancelarbtn,
-                  }}
-                >
-                  CANCELAR
-                </Button>
-              </div>
-            </Box>
-          </div>
+          </Box>  
         </Box>
       </Modal>
     </div>

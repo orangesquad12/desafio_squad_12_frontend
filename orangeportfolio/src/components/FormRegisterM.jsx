@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
@@ -7,7 +7,6 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
-
 const Title = styled.h1`
     font-family: Roboto;
     font-size: 48px;
@@ -42,6 +41,10 @@ function FormRegister() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
+  // const setAlertOpen = useState(false);
+
   const handleFormEdit = (event, name) => {
     setFormData({
       ...formData,
@@ -50,7 +53,6 @@ function FormRegister() {
   };
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   const handleForm = async (event) => {
     try {
@@ -63,17 +65,16 @@ function FormRegister() {
         body: JSON.stringify(formData),
       });
 
-      const json = await response.json();
       console.log("resposta status:", response.status);
-      console.log(json);
 
       if (response.status === 200) {
-        console.log("Cadastro OK");
-        setFormSubmitted(true);
+        console.log("Cadastro efetuado com sucesso");
         setTimeout(() => {
-          navigate("/login");
-        }, 3000);
-        // setAlertOpen(true);
+          navigate("/");
+        }, 2500);
+      } else {
+        const errorJson = await response.json();
+        console.error("Erro de resposta da API:", errorJson);
       }
     } catch (err) {
       console.error("Erro no cadastro:", err);
@@ -85,19 +86,6 @@ function FormRegister() {
   const togglePass = () => {
     setShowPass(!showPass);
   };
-
-  useEffect(() => {
-    let timeout;
-    if (formSubmitted) {
-      timeout = setTimeout(() => {
-        navigate("/");
-      }, 3000);
-    }
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [formSubmitted, navigate]);
 
   return (
     <Container>
@@ -112,7 +100,6 @@ function FormRegister() {
       )}
 
       <Title>Cadastre-se</Title>
-      {/* <StateTextFields /> */}
       <Box
         component="form"
         sx={{
@@ -205,9 +192,7 @@ function FormRegister() {
           ),
         }}
       />
-      <ButtonLargerM onClick={() => handleForm(navigate)}>
-        CADASTRAR
-      </ButtonLargerM>
+      <ButtonLargerM onClick={handleForm}>CADASTRAR</ButtonLargerM>
     </Container>
   );
 }

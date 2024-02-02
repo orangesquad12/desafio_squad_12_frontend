@@ -5,7 +5,6 @@ import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
 import Typography from "@mui/material/Typography";
-// import Googlebtn from "../assets/img/googlebtn.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -27,11 +26,6 @@ const Title = styled.h1`
 const EyeIcon = styled.div`
   cursor: pointer;
 `;
-
-// const Google = styled.a`
-//   margin: 0 auto;
-//   margin-bottom: 32px;
-// `;
 
 const Container = styled.div`
   display: flex;
@@ -85,9 +79,6 @@ function FormLoginM() {
       >
         Faça login com email
       </Typography>
-      {/* <Google href="#">
-        <img src={Googlebtn} alt="Imagem Login" />
-      </Google> */}
       <TextField
         sx={{
           width: "517px",

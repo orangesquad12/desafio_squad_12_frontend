@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import StateTextFields from "./DoubleTextFieldM";
-import { TextField, useMediaQuery, useTheme} from "@mui/material";
+import { TextField, useMediaQuery, useTheme } from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
 import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
-import Googlebtn from "../assets/img/googlebtn.png"
+import Googlebtn from "../assets/img/googlebtn.png";
 import { Link, useNavigate } from "react-router-dom";
-import {useAuth} from "../contexts/AuthContext"
+import { useAuth } from "../contexts/AuthContext";
 
 const Title = styled.h1`
     font-family: Roboto;
@@ -52,23 +51,21 @@ function FormLoginM() {
       const response = await fetch("http://localhost:8085/api/auth/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email: email,
-          password: password
-        })
+          password: password,
+        }),
       });
 
       if (response.ok) {
         console.log("login bem-sucedido");
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setAuthToken(data.token);
         navigate("/portfolio");
-       
       } else {
-      
         console.error("Erro ao fazer login");
       }
     } catch (error) {
@@ -124,14 +121,14 @@ function FormLoginM() {
           ),
         }}
       />
-      <ButtonLargerM  onClick={handleLogin}>ENTRAR</ButtonLargerM>
+      <ButtonLargerM onClick={handleLogin}>ENTRAR</ButtonLargerM>
       <Link
         to={"/cadastro"}
         style={{
           color: "#818388",
           marginLeft: "10px",
           marginTop: "18px",
-          textDecoration: "none"
+          textDecoration: "none",
         }}
       >
         {" "}

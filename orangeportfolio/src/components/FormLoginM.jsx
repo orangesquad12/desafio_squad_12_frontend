@@ -4,7 +4,8 @@ import ButtonLargerM from "./ButtonLargM";
 import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
-import Googlebtn from "../assets/img/googlebtn.png";
+import Typography from "@mui/material/Typography";
+// import Googlebtn from "../assets/img/googlebtn.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -27,10 +28,11 @@ const EyeIcon = styled.div`
   cursor: pointer;
 `;
 
-const Google = styled.a`
-  margin: 0 auto;
-  margin-bottom: 32px;
-`;
+// const Google = styled.a`
+//   margin: 0 auto;
+//   margin-bottom: 32px;
+// `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -76,9 +78,16 @@ function FormLoginM() {
   return (
     <Container>
       <Title>Entre no Orange Portfólio</Title>
-      <Google href="#">
+      <Typography
+        variant="h5"
+        component="h2"
+        sx={{ marginBottom: "1.5em", color: "#515255" }}
+      >
+        Faça login com email
+      </Typography>
+      {/* <Google href="#">
         <img src={Googlebtn} alt="Imagem Login" />
-      </Google>
+      </Google> */}
       <TextField
         sx={{
           width: "517px",
@@ -128,6 +137,7 @@ function FormLoginM() {
           color: "#818388",
           marginLeft: "10px",
           marginTop: "18px",
+          fontFamily: "Roboto",
           textDecoration: "none",
         }}
       >

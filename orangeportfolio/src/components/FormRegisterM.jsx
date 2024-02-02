@@ -6,6 +6,7 @@ import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
 import Alert from "@mui/material/Alert";
+import { useNavigate } from "react-router-dom";
 const Title = styled.h1`
     font-family: Roboto;
     font-size: 48px;
@@ -40,7 +41,9 @@ function FormRegister() {
     password: "",
   });
 
-  const [alertOpen, setAlertOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // const setAlertOpen = useState(false);
 
   const handleFormEdit = (event, name) => {
     setFormData({
@@ -68,7 +71,8 @@ function FormRegister() {
 
       if (response.status === 200) {
         console.log("Cadastro OK");
-        setAlertOpen(true);
+        navigate("/login");
+        // setAlertOpen(true);
       }
     } catch (err) {
       console.error("Erro no cadastro:", err);
@@ -187,7 +191,9 @@ function FormRegister() {
           ),
         }}
       />
-      <ButtonLargerM onClick={handleForm}>CADASTRAR</ButtonLargerM>
+      <ButtonLargerM onClick={() => handleForm(navigate)}>
+        CADASTRAR
+      </ButtonLargerM>
     </Container>
   );
 }

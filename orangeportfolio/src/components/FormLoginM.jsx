@@ -6,7 +6,8 @@ import styled from "styled-components";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import InputAdornment from "@mui/material/InputAdornment";
 import Googlebtn from "../assets/img/googlebtn.png"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {useAuth} from "../contexts/AuthContext"
 
 const Title = styled.h1`
     font-family: Roboto;
@@ -37,10 +38,42 @@ const Container = styled.div`
 `;
 
 function FormLoginM() {
+  const { setAuthToken } = useAuth();
   const [showPass, setShowPass] = useState(false);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const togglePass = () => {
     setShowPass(!showPass);
+  };
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8085/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        })
+      });
+
+      if (response.ok) {
+        console.log("login bem-sucedido");
+        const data = await response.json();
+        console.log(data)
+        setAuthToken(data.token);
+        navigate("/portfolio");
+       
+      } else {
+      
+        console.error("Erro ao fazer login");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+    }
   };
 
   return (
@@ -62,6 +95,8 @@ function FormLoginM() {
           },
         }}
         label="Email address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
       <TextField
         sx={{
@@ -76,6 +111,8 @@ function FormLoginM() {
           },
         }}
         label="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
         type={showPass ? "text" : "password"}
         InputProps={{
           endAdornment: (
@@ -87,7 +124,7 @@ function FormLoginM() {
           ),
         }}
       />
-      <ButtonLargerM>ENTRAR</ButtonLargerM>
+      <ButtonLargerM  onClick={handleLogin}>ENTRAR</ButtonLargerM>
       <Link
         to={"/cadastro"}
         style={{

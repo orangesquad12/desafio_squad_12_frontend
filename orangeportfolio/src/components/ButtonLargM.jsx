@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Button} from "@mui/material"
 
-function ButtonLargerM({children}){
+function ButtonLargerM({children, onClick}){
     return(
         <Button 
+        onClick={onClick}
         sx={{width: "517px", 
         height: "42px", 
         background: "linear-gradient(135deg, #F83 0%, #F52 73.9%)",

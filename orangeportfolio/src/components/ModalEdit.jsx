@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { TextField, Link } from "@mui/material";
+import { TextField, Link, Chip} from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import InputFileUpload from "./Upload";
+import AccountCircleSharpIcon from '@mui/icons-material/AccountCircleSharp';
 
 const style = {
   display: "flex",
@@ -38,9 +39,15 @@ const cancelarbtn = {
 
 export default function AddProject() {
   const [open, setOpen] = React.useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const handleViewModalOpen = () => setViewModalOpen(true);
+  const handleViewModalClose = () => setViewModalOpen(false);
+  const [descricao, setDescricao] = useState("");
+  const [title, setTitle] = useState("")
+
 
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
@@ -64,8 +71,53 @@ export default function AddProject() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        
         <Box sx={style}>
+          <Modal open={viewModalOpen} onClose={handleViewModalClose}>
+              <Box sx={{ display: "flex",
+                       position: "relative",
+                      top: "50%",
+                      left: "50%",
+                      gap: "16px",
+                      transform: "translate(-50%, -50%)",
+                      maxWidth:"890px",
+                      bgcolor: "#FEFEFE",
+                      boxShadow: 24,
+                      p: 4, 
+                      flexDirection:"column",
+                      "@media screen and (max-width: 740px)": {
+
+                        width: "80%",
+                        maxHeight: "80vh", 
+                        overflowY: "auto",
+                        
+                    } 
+                      
+              }}>
+                <Box sx={{display:"flex", flexDirection:"row", justifyContent: "space-around", maxWidth:"100%"}}>
+                    <Box sx={{ display:"flex", flexDirection:"row", marginRight: "1em"}}>
+                      <AccountCircleSharpIcon color="disabled" fontSize="large"/>
+                      <Typography sx={{fontSize:"1em", marginLeft:"1em"}}>Camila Soares</Typography>
+                    </Box>
+                    <Box sx={{}}>
+                        <Typography sx={{color:"#515255", fontSize:"1em"}}>{title}</Typography>
+                    </Box>
+                    <Box sx={{}}>
+                        <Chip label="UX"/>
+                        <Chip label="Web"/>
+                    </Box>
+                </Box>
+                <Box sx={{display:"flex", justifyContent:"center", width:"100%", marginTop:"50px", marginBottom:"50px"}}>
+                  <img
+                    src={uploadImg}
+                    alt="Imagem Selecionada"
+                    style={{ maxWidth: "100%"}}
+                />
+                </Box>
+                <Box sx={{ width:"100%", textAlign:"center"}}> 
+                    <Typography sx={{color:"#515255", overflowWrap: "break-word"}}>{descricao}</Typography>
+                </Box>
+              </Box>
+          </Modal>
         
           {/* box-left*/}
           <Box >
@@ -88,7 +140,7 @@ export default function AddProject() {
                 <img
                   src={uploadImg}
                   alt="Imagem Selecionada"
-                  style={{ maxWidth: "100%", height: "380px", marginTop:'3px' }}
+                  style={{ maxWidth: "100%", height: "380px"   }}
                 />
               ) : (
                 <>
@@ -96,15 +148,11 @@ export default function AddProject() {
                 </>
               )}
               <Link
-               underline="none"
-              sx={{
-                color: "#515255",
-                fontFamily:"Roboto"
-                
-              }}
-            >
-              {" "}
-              Visualizar Publicação
+              underline="none"
+              sx={{color:"#515255"}}
+              onClick={handleViewModalOpen} 
+              >
+                Visualizar Publicação
             </Link>
             <Box sx={{display:'flex', flexDirection:"row"}}>
               <Button
@@ -146,7 +194,7 @@ export default function AddProject() {
               "@media screen and (max-width: 740px)": {
                   width: "90%",
                   marginLeft: "20px",
-                  '.editProject': {
+                  '.editProject2': {
                     display:"inline"
                 }
 
@@ -160,11 +208,11 @@ export default function AddProject() {
                 color: "#515255",
                 textAlign: "center",
                 marginBottom: "20px",
-                "&.editProject": {
+                "&.editProject2": {
                 display: "none"
               }
             }}
-            className="editProject"
+            className="editProject2"
             >
               Editar Projeto
             </Typography>
@@ -173,6 +221,8 @@ export default function AddProject() {
                 label="Título"
                 variant="outlined"
                 sx={{marginBottom:'20px'}}
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
               <TextField
                 
@@ -193,6 +243,8 @@ export default function AddProject() {
                 label="Descrição"
                 multiline
                 rows={6}
+                value={descricao}
+                onChange={(e) => setDescricao(e.target.value)}
                 sx={{marginBottom:'20px'}}
               />
           </Box>  

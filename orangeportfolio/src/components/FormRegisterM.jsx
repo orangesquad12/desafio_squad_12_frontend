@@ -42,7 +42,7 @@ function FormRegister() {
   });
 
   const navigate = useNavigate();
-  const [setFormSubmitted] = useState(false);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleFormEdit = (event, name) => {
     setFormData({
@@ -58,8 +58,8 @@ function FormRegister() {
     try {
       event.preventDefault();
       if (
-        !formData.lastName ||
         !formData.firstName ||
+        !formData.lastName ||
         !formData.email ||
         !formData.password
       ) {
@@ -83,15 +83,16 @@ function FormRegister() {
         setSuccessOpen(true);
         setAlertOpen(false);
         setFormSubmitted(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 2500);
       } else {
         const errorJson = await response.json();
         console.error("Erro de resposta da API:", errorJson);
         setSuccessOpen(true);
         setAlertOpen(false);
       }
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2500);
     } catch (err) {
       console.error("Erro no cadastro:", err);
       setSuccessOpen(true);

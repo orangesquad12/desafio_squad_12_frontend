@@ -42,8 +42,7 @@ function FormRegister() {
   });
 
   const navigate = useNavigate();
-
-  // const setAlertOpen = useState(false);
+  const [setFormSubmitted] = useState(false);
 
   const handleFormEdit = (event, name) => {
     setFormData({
@@ -52,11 +51,23 @@ function FormRegister() {
     });
   };
 
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [successOpen, setSuccessOpen] = useState(false);
 
   const handleForm = async (event) => {
     try {
       event.preventDefault();
+      if (
+        !formData.lastName ||
+        !formData.firstName ||
+        !formData.email ||
+        !formData.password
+      ) {
+        setAlertOpen(true);
+        setSuccessOpen(false);
+        console.error("Preencha todos os campos obrigatórios");
+        return;
+      }
       const response = await fetch("http://localhost:8085/api/auth/register", {
         method: "POST",
         headers: {
@@ -69,15 +80,22 @@ function FormRegister() {
 
       if (response.status === 200) {
         console.log("Cadastro efetuado com sucesso");
+        setSuccessOpen(true);
+        setAlertOpen(false);
+        setFormSubmitted(true);
         setTimeout(() => {
           navigate("/");
         }, 2500);
       } else {
         const errorJson = await response.json();
         console.error("Erro de resposta da API:", errorJson);
+        setSuccessOpen(true);
+        setAlertOpen(false);
       }
     } catch (err) {
       console.error("Erro no cadastro:", err);
+      setSuccessOpen(true);
+      setAlertOpen(false);
     } finally {
       setFormSubmitted(true);
     }
@@ -87,15 +105,35 @@ function FormRegister() {
     setShowPass(!showPass);
   };
 
+  const closeAlert = () => {
+    setAlertOpen(false);
+  };
+
+  const closeSuccess = () => {
+    setSuccessOpen(false);
+  };
+
   return (
     <Container>
-      {formSubmitted && (
+      {alertOpen && (
+        <Alert
+          variant="filled"
+          severity="error"
+          onClose={closeAlert}
+          sx={{ width: "21em", margin: "0 auto" }}
+        >
+          Preencha os campos obrigatórios
+        </Alert>
+      )}
+
+      {successOpen && (
         <Alert
           variant="filled"
           severity="success"
-          sx={{ width: "20em", margin: "0 auto" }}
+          onClose={closeSuccess}
+          sx={{ width: "21em", margin: "0 auto" }}
         >
-          Cadastro realizado com sucesso
+          Cadastro feito com sucesso
         </Alert>
       )}
 
@@ -118,10 +156,10 @@ function FormRegister() {
         <TextField
           id="outlined-controlled"
           label="Nome"
-          value={formData.lastName}
+          value={formData.firstName}
           required
           onChange={(e) => {
-            handleFormEdit(e, "lastName");
+            handleFormEdit(e, "firstName");
           }}
           sx={{
             "@media (max-width: 592px)": {
@@ -133,9 +171,9 @@ function FormRegister() {
           id="outlined-uncontrolled"
           label="Sobrenome"
           required
-          value={formData.firstName}
+          value={formData.lastName}
           onChange={(e) => {
-            handleFormEdit(e, "firstName");
+            handleFormEdit(e, "lastName");
           }}
           sx={{
             "@media (max-width: 592px)": {

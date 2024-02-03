@@ -237,7 +237,7 @@ export default function AddProject() {
                 width: "90%",
                 marginLeft: "20px",
                 ".editProject2": {
-                  display: "inline",
+                  display: "block",
                 },
               },
             }}

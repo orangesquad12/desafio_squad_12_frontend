@@ -1,82 +1,40 @@
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { TextField, Link } from "@mui/material";
+import { TextField, Link, Chip } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import InputFileUpload from "./Upload";
-import Grid from "@mui/material/Grid";
-import Chip from "@mui/material/Chip";
-import Avatar from "../assets/img/Avatar.png";
-import transferirImage from "../assets/img/img_projeto.png";
-
+import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
+import { useAuth } from "../contexts/AuthContext";
 const style = {
   display: "flex",
-  flexDirection: "column",
-  position: "absolute",
+  position: "relative",
   top: "50%",
   left: "50%",
   gap: "16px",
   transform: "translate(-50%, -50%)",
-  height: "auto",
+  maxWidth: "890px",
   bgcolor: "#FEFEFE",
   boxShadow: 24,
-
   p: 4,
-};
-
-const projects = [
-  {
-    id: 1,
-    avatar: Avatar,
-    title: "Ecommerce One Page",
-    tag: [<Chip key="1" label="UX" />, <Chip key="2" label="Web" />],
-    thumb: transferirImage,
-    author: "Camila Soares",
-    date: "12/12",
-    description:
-      "Temos o prazer de compartilhar com vocês uma variação da nosso primeiro recurso gratuito, Monoceros. É um modelo de uma página para mostrar seus produtos. Tentamos redesenhar uma versão mais B2C e minimalista do nosso primeiro template de e-commerce.",
-
-    subtitle: "Download",
-    link: "https://gumroad.com/products/wxCSL",
+  "@media screen and (max-width: 740px)": {
+    display: "flex",
+    flexDirection: "column-reverse",
+    width: "80%",
+    maxHeight: "80vh",
+    overflowY: "auto",
+    ".editOne": {
+      display: "none",
+    },
   },
-];
-
-const modalProjectAdd = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "auto",
-  height: "auto",
-  bgcolor: "#FEFEFE",
-  boxShadow: 24,
-
-  p: 4,
 };
-
-const txtStyleSpace = {
-  display: "flex",
-  flexDirection: "column",
-  gap: "16px",
-  marginTop: "16px",
-};
-const formStyle = {
-  display: "flex",
-  flexDirection: "row",
-  gap: "16px",
-};
-
-const position = {
-  display: "flex",
-  gap: "16px",
-};
-
 const cancelarbtn = {
   "&:hover": {
     backgroundColor: "#C1B3B3",
   },
 };
+
 
 export default function AddProject() {
   const [open, setOpen] = React.useState(false);
@@ -86,24 +44,79 @@ export default function AddProject() {
   const handleClose = () => setOpen(false);
   const handleViewModalOpen = () => setViewModalOpen(true);
   const handleViewModalClose = () => setViewModalOpen(false);
+  
 
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
   };
+  const [formData, setFormData] = useState({
+    userId: "1",
+    title: "",
+    tags: "",
+    description: "",
+    date: "2024-02-02"
+  });
+  
+  const handleFormProject = (event, name) => {
+    if (name === "tags") {
+      const tagsArray = event.target.value.split(",");
+    setFormData({
+      ...formData,
+      [name]: tagsArray,
+    });
+  }else{
+    setFormData({
+      ...formData,
+      [name]: event.target.value,
+    });
+
+  }};
+  const {token} = useAuth();
+  const handleProject = async () => {
+    try {
+      const response = await fetch("http://localhost:8085/api/project", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          userId: formData.userId,
+          title: formData.title,
+          tags:  formData.tags,
+          description: formData.description,
+          date: formData.date
+        }),
+      });
+
+      if (response.ok) {
+        console.log("cadastro de projeto bem sucedido");
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Erro ao cadastrar projeto");
+      }
+    } catch (error) {
+      console.error("Erro ao cadastrar projeto", error);
+    }
+  };
+
 
   return (
     <div>
       <Button
         onClick={handleOpen}
         sx={{
+          marginTop:"10px",
           width: "200",
           height: "42",
           backgroundColor: "#E0E0E0",
           color: "#8B8B8B",
         }}
       >
-        Adicionar Projeto
+        Adicionar projeto
       </Button>
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -111,257 +124,239 @@ export default function AddProject() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography
-            id="modal-modal-title"
-            variant="h6"
-            component="h2"
-            sx={{ color: "#515255" }}
-          >
-            Adicionar Projeto
-          </Typography>
-          <div style={formStyle}>
-            <div style={txtStyleSpace}>
-              {uploadImg ? (
+          <Modal open={viewModalOpen} onClose={handleViewModalClose}>
+            <Box
+              sx={{
+                display: "flex",
+                position: "relative",
+                top: "50%",
+                left: "50%",
+                gap: "16px",
+                transform: "translate(-50%, -50%)",
+                maxWidth: "890px",
+                bgcolor: "#FEFEFE",
+                boxShadow: 24,
+                p: 4,
+                flexDirection: "column",
+                "@media screen and (max-width: 740px)": {
+                  width: "80%",
+                  maxHeight: "80vh",
+                  overflowY: "auto",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  maxWidth: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    marginRight: "1em",
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box>
+                      <AccountCircleSharpIcon
+                        color="disabled"
+                        fontSize="large"
+                      />
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontSize: "1em", marginLeft: ".75em" }}>
+                        Camila Soares
+                      </Typography>
+                    </Box>
+                  </Box>
+                </Box>
+                <Box sx={{}}>
+                  <Typography sx={{ color: "#515255", fontSize: "1em" }}>
+                    {formData.title}
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", gap: ".75em" }}>
+                  <Box>
+                    <Chip label="UX" />
+                  </Box>
+                  <Box>
+                    <Chip label="Web" />
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%",
+                  marginTop: "50px",
+                  marginBottom: "50px",
+                }}
+              >
                 <img
                   src={uploadImg}
                   alt="Imagem Selecionada"
-                  style={{ maxWidth: "100%", height: "380px" }}
+                  style={{ maxWidth: "100%" }}
                 />
-              ) : (
-                <>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Selecione o conteúdo que você deseja fazer upload
-                  </Typography>
-                  <InputFileUpload onChange={handleChangeImg} />
-                </>
-              )}
-            </div>
-            <div style={txtStyleSpace}>
-              <TextField
-                sx={{ width: "100%" }}
-                id="outlined-basic"
-                label="Título"
-                variant="outlined"
-              />
-              <TextField
-                sx={{ width: 413 }}
-                id="outlined-basic"
-                label="Tags"
-                variant="outlined"
-              />
-              <TextField
-                sx={{ width: 413 }}
-                id="outlined-basic"
-                label="Link"
-                variant="outlined"
-              />
-              <TextField
-                id="outlined-multiline-static"
-                label="Descrição"
-                multiline
-                rows={6}
-              />
-              <Link
-                href="#"
-                underline="none"
-                sx={{
-                  color: "#515255",
-                }}
-              >
-                {" "}
-              </Link>
-            </div>
-          </div>
-          <div>
-            <Link
-              href="#"
-              underline="none"
-              sx={{
-                color: "#515255",
-                fontWeight: "400",
-                marginBottom: "16px",
-              }}
-              onClick={handleViewModalOpen}
+              </Box>
+              <Box sx={{ width: "100%", textAlign: "center" }}>
+                <Typography
+                  sx={{ color: "#515255", overflowWrap: "break-word" }}
+                >
+                  {formData.description}
+                </Typography>
+              </Box>
+            </Box>
+          </Modal>
+
+          {/* box-left*/}
+          <Box>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{ color: "#515255", textAlign: "center", "&.editOne": {} }}
+              className="editOne"
             >
-              {" "}
-              Visualizar Publicação
+              Adicionar Projeto
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ marginTop: "1px" }}>
+              Selecione o conteúdo que você deseja fazer upload
+            </Typography>
+            {uploadImg ? (
+              <img
+                src={uploadImg}
+                alt="Imagem Selecionada"
+                value={formData.image}
+                  onChange={(e) => {
+                    handleFormProject(e, "image");
+                  }}
+                style={{ maxWidth: "100%", height: "380px" }}
+              />
+            ) : (
+              <>
+                <InputFileUpload onChange={handleChangeImg} />
+              </>
+            )}
+            <Link underline="none" onClick={handleViewModalOpen}>
+              <Typography
+                sx={{ color: "#515255", marginTop: "1em", cursor: "Pointer" }}
+              >
+                Visualizar Publicação
+              </Typography>
             </Link>
-            <div></div>
-            <Box sx={position}>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
               <Button
                 variant="contained"
                 size="medium"
+                onClick={handleProject}
                 sx={{
-                  display: "block",
-                  marginTop: "16px",
-                  width: "101px",
-                  height: "42px",
+                  marginTop: "10px",
+                  marginRight: "10px",
+                  width: "7rem",
+                  height: "2.7rem",
                   background: "linear-Gradient(#FF8833, #FF5522)",
                 }}
               >
                 SALVAR
               </Button>
-
-              <div>
-                <Button
-                  variant="contained"
-                  size="medium"
-                  onClick={handleClose}
-                  sx={{
-                    display: "block",
-                    marginTop: "16px",
-                    width: "101px",
-                    height: "42px",
-                    color: "#3A3A3A",
-                    backgroundColor: "#DFDFDF",
-                    ...cancelarbtn,
-                  }}
-                >
-                  CANCELAR
-                </Button>
-              </div>
+              <Button
+                variant="contained"
+                size="medium"
+                onClick={handleClose}
+                sx={{
+                  marginTop: "10px",
+                  width: "7rem",
+                  height: "2.7rem",
+                  color: "#3A3A3A",
+                  backgroundColor: "#DFDFDF",
+                  ...cancelarbtn,
+                }}
+              >
+                CANCELAR
+              </Button>
             </Box>
-          </div>
-          <Modal
-            open={viewModalOpen}
-            onClose={handleViewModalClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+          </Box>
+          {/* box-right*/}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              mt: "5%",
+              "@media screen and (max-width: 740px)": {
+                width: "90%",
+                marginLeft: "20px",
+                ".editProject2": {
+                  display: "block",
+                },
+              },
+            }}
           >
-            <Box sx={modalProjectAdd}>
-              <div>
-                {projects.map((project) => (
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            gap: "20px",
-                            alignItems: "center",
-                          }}
-                        >
-                          <img
-                            src={project.avatar}
-                            alt={project.title}
-                            style={{
-                              borderRadius: "50%",
-                              width: "64px",
-                              height: "64px",
-                            }}
-                          />
-                          <Typography
-                            sx={{
-                              fontSize: "1rem",
-                              color: "#515255",
-                              marginLeft: "10px",
-                            }}
-                          >
-                            {project.author}
-                            <Typography
-                              sx={{
-                                fontSize: "16",
-                                color: "#515255",
-                                marginTop: "4px",
-                              }}
-                            >
-                              {project.date}
-                            </Typography>
-                          </Typography>
-                          {projects.map((project) => (
-                            <Typography
-                              sx={{ fontSize: "1.5rem", margin: "0 50px" }}
-                            >
-                              {project.title}
-                            </Typography>
-                          ))}
-                          {projects.map((project) => (
-                            <Box sx={{ display: "flex", gap: "5px" }}>
-                              {project.tag.map((tag, index) => (
-                                <Box item xs={3} key={index}>
-                                  {tag}
-                                </Box>
-                              ))}
-                            </Box>
-                          ))}
-                        </Box>
-
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            marginTop: "8px",
-                          }}
-                        ></div>
-                      </div>
-                      <img
-                        src={project.thumb}
-                        alt="Projeto Adicionado"
-                        style={{
-                          marginTop: "16px",
-                          width: "100%",
-                          height: "auto",
-                        }}
-                      />
-
-                      <Box
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "flex-start",
-                          marginTop: "16px",
-                          marginLeft: "16px",
-                        }}
-                      >
-                        <Typography
-                          sx={{
-                            fontSize: "1rem",
-                            color: "#515255",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          {project.description}
-                        </Typography>
-                        <Typography
-                          sx={{
-                            fontSize: "16",
-                            color: "#515255",
-                            marginBottom: "8px",
-                          }}
-                        >
-                          {project.subtitle}
-                        </Typography>
-                        <Typography
-                          sx={{ fontSize: "0.7rem", color: "#515255" }}
-                        >
-                          {project.link}
-                        </Typography>
-                      </Box>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </Box>
-          </Modal>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              sx={{
+                color: "#515255",
+                textAlign: "center",
+                marginBottom: "20px",
+                "&.editProject2": {
+                  display: "none",
+                },
+              }}
+              className="editProject2"
+            >
+              Adicionar Projeto
+            </Typography>
+            <TextField
+              id="outlined-basic"
+              label="Título"
+              variant="outlined"
+              sx={{ marginBottom: "20px" }}
+              value={formData.title}
+              onChange={(e) => {
+                handleFormProject(e,"title")
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Tags"
+              variant="outlined"
+              value={formData.tags}
+                  onChange={(e) => {
+                    handleFormProject(e, "tags");
+                  }}
+              sx={{ marginBottom: "20px" }}
+              
+            />
+            <TextField
+              id="outlined-basic"
+              label="Link"
+              variant="outlined"
+              sx={{ marginBottom: "20px" }}
+            />
+            <TextField
+              id="outlined-multiline-static"
+              label="Descrição"
+              multiline
+              rows={6}
+              value={formData.description}
+              onChange={(e) => {
+                handleFormProject(e, "description");
+              }}
+              sx={{ marginBottom: "20px" }}
+            />
+          </Box>
         </Box>
       </Modal>
     </div>

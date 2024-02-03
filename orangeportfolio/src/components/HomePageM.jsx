@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import ResponsiveAppBar from "./AppBarM";
 import { Container, Typography, Box, TextField } from "@mui/material";
 import Avatar from "../assets/img/Avatar.png";
@@ -5,6 +6,9 @@ import AddProject from "./Modal";
 import ProjectListM from "./ProjectListM";
 
 function HomePageM() {
+ 
+  const [userName, setUserName] = useState("");
+ 
   return (
     <div>
       <ResponsiveAppBar />
@@ -56,6 +60,7 @@ function HomePageM() {
         >
           Meus Projetos
         </Typography>
+
         <TextField
           sx={{
             width: "517px",

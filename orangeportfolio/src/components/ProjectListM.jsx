@@ -26,11 +26,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX"  />, <Chip sx={{
+        tag:  [<Chip key="3" label="UX"  />, <Chip sx={{
             '& .MuiChip-label': {
                 padding:"8px",
             },
-            }} key="2" label="web"  />],
+            }} key="4" label="web"  />],
         thumb: transferirImage,
     },
     {
@@ -42,7 +42,7 @@ const projects = [
             '& .MuiChip-label': {
                 padding:"8px",
             },
-            }} key="2" label="web"/>],
+            }} key="5" label="web"/>],
         thumb: transferirImage,
     },
     {
@@ -54,7 +54,7 @@ const projects = [
             '& .MuiChip-label': {
                 padding:"8px",
             },
-            }} key="2" label="web" />],
+            }} key="6" label="web" />],
         thumb: transferirImage, 
     },
     {
@@ -66,7 +66,7 @@ const projects = [
             '& .MuiChip-label': {
                 padding:"8px",
             },
-            }} key="2" label="web" />],
+            }} key="7" label="web" />],
         thumb: transferirImage,
     },
     {
@@ -74,11 +74,11 @@ const projects = [
         title:
         'Camila Soares',
         avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
+        tag:  [<Chip key="8" label="UX" />, <Chip sx={{
             '& .MuiChip-label': {
                 padding:"8px",
             },
-            }} key="2" label="web" />],
+            }} key="9" label="web" />],
         thumb: transferirImage,
     }
 ]

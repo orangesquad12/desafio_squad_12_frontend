@@ -58,8 +58,9 @@ function FormLoginM() {
       if (response.ok) {
         console.log("login bem-sucedido");
         const data = await response.json();
-        console.log(data);
-        setAuthToken(data.token);
+        console.log(data)
+        const token = data.token;
+        setAuthToken(token);
         navigate("/portfolio");
       } else {
         console.error("Erro ao fazer login");

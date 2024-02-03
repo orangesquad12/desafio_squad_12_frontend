@@ -4,9 +4,12 @@ import Typography from "@mui/material/Typography";
 import { TextField, Link, Chip } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import InputFileUpload from "./Upload";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 import { useAuth } from "../contexts/AuthContext";
+
+
 const style = {
   display: "flex",
   position: "relative",
@@ -40,11 +43,16 @@ export default function AddProject() {
   const [open, setOpen] = React.useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
+  const[link, setLink] = React.useState("");
+  const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleViewModalOpen = () => setViewModalOpen(true);
   const handleViewModalClose = () => setViewModalOpen(false);
   
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
@@ -56,6 +64,18 @@ export default function AddProject() {
     description: "",
     date: "2024-02-02"
   });
+
+  const handleCancel = () => {
+    setFormData({
+      userId: "1",
+      title: "",
+      tags: "",
+      description: "",
+      date: "",
+      link: "",
+    });
+    setLink("")
+  };
   
   const handleFormProject = (event, name) => {
     if (name === "tags") {
@@ -92,6 +112,7 @@ export default function AddProject() {
       if (response.ok) {
         console.log("cadastro de projeto bem sucedido");
         const data = await response.json();
+        setOpenModal(true);
         console.log(data);
       } else {
         console.error("Erro ao cadastrar projeto");
@@ -258,7 +279,11 @@ export default function AddProject() {
               <Button
                 variant="contained"
                 size="medium"
-                onClick={handleProject}
+                onClick={()  => {
+                  handleProject();
+                  handleCancel();}
+                }
+
                 sx={{
                   marginTop: "10px",
                   marginRight: "10px",
@@ -272,7 +297,10 @@ export default function AddProject() {
               <Button
                 variant="contained"
                 size="medium"
-                onClick={handleClose}
+                onClick={()  => {
+                  handleClose();
+                  handleCancel();}
+                }
                 sx={{
                   marginTop: "10px",
                   width: "7rem",
@@ -343,6 +371,8 @@ export default function AddProject() {
               id="outlined-basic"
               label="Link"
               variant="outlined"
+              value={link}
+              onChange={(e) => setLink(e.target.value)}
               sx={{ marginBottom: "20px" }}
             />
             <TextField
@@ -358,6 +388,35 @@ export default function AddProject() {
             />
           </Box>
         </Box>
+      </Modal>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", backgroundColor: "#fff", padding: "20px", minWidth:"300px" }}>
+          <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+              <Typography id="modal-modal-title">
+                Projeto Adicionado com sucesso
+              </Typography>
+              <CheckCircleIcon sx={{margin:"0 auto", color: "#118822"}}/>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => {
+                      handleClose();
+                      setOpenModal(false);
+                    }}
+                    sx={{
+                    marginTop:"10px",
+                    background: "linear-Gradient(#FF8833, #FF5522)",
+                  }}
+                  >
+                    VOLTAR PARA PROJETOS
+                </Button>
+           </Box>
+        </div>
       </Modal>
     </div>
   );

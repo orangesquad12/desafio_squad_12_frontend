@@ -77,7 +77,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.index} onClick={handleCloseNavMenu}>
                  <Link to={page === 'Meus Projetos' ? '/portfolio' : '/descobrir'} 
                  style={{ textDecoration: 'none', color: 'inherit' }}>
                       <Typography textAlign="center">{page}</Typography>
@@ -107,7 +107,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, marginLeft:'100px'}}>
                 {pages.map((page) => (
                 <Button
-                    key={page}
+                    key={page.index}
                     component={Link}
                     to={page === 'Meus Projetos' ? '/portfolio' : '/descobrir'}
                     onClick={handleCloseNavMenu}

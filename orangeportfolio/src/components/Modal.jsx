@@ -43,19 +43,25 @@ export default function AddProject() {
   const [open, setOpen] = React.useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
+  const [imgDataUrl, setImgDataUrl] = useState(null);
   const[link, setLink] = React.useState("");
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleViewModalOpen = () => setViewModalOpen(true);
   const handleViewModalClose = () => setViewModalOpen(false);
+  const [showImage, setShowImage] = useState(false);
+
   
+
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
+    setImgDataUrl(imgDataUrl);
+    setShowImage(true); 
   };
   const [formData, setFormData] = useState({
     userId: "1",
@@ -75,6 +81,8 @@ export default function AddProject() {
       link: "",
     });
     setLink("")
+    setUploadImg(null) 
+    setShowImage(false)
   };
   
   const handleFormProject = (event, name) => {
@@ -92,6 +100,37 @@ export default function AddProject() {
 
   }};
   const {token} = useAuth();
+  
+  const uploadBase64Image = (base64) => {
+    fetch(base64)
+      .then(res => res.blob())
+      .then(blob => {
+        const fd = new FormData();
+        const file = new File([blob], "filename.jpeg");
+        fd.append('image', file)
+        const API_URL = 'http://localhost:8085/api/project/image/6';
+        fetch(API_URL, {
+          method: 'POST',
+          body: fd,
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
+          .then(res => {
+              if (!res.ok) {
+                  throw new Error('Erro ao enviar o arquivo: ' + res.status);
+              }
+              console.log('Arquivo enviado com sucesso!');
+          })
+          .catch(error => console.error('Erro ao enviar o arquivo:', error));
+      })
+      .catch(error => console.error('Erro ao converter o arquivo:', error));
+}
+
+  
+  
+  
+  
   const handleProject = async () => {
     try {
       const response = await fetch("http://localhost:8085/api/project", {
@@ -114,6 +153,9 @@ export default function AddProject() {
         const data = await response.json();
         setOpenModal(true);
         console.log(data);
+        uploadBase64Image(imgDataUrl);
+        setUploadImg(null);
+        setShowImage(false);
       } else {
         console.error("Erro ao cadastrar projeto");
       }

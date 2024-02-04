@@ -4,11 +4,10 @@ import Typography from "@mui/material/Typography";
 import { TextField, Link, Chip } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import InputFileUpload from "./Upload";
 import AccountCircleSharpIcon from "@mui/icons-material/AccountCircleSharp";
 import { useAuth } from "../contexts/AuthContext";
-
 
 const style = {
   display: "flex",
@@ -38,21 +37,18 @@ const cancelarbtn = {
   },
 };
 
-
 export default function AddProject() {
   const [open, setOpen] = React.useState(false);
   const [viewModalOpen, setViewModalOpen] = useState(false);
   const [uploadImg, setUploadImg] = React.useState(null);
   const [imgDataUrl, setImgDataUrl] = useState(null);
-  const[link, setLink] = React.useState("");
+  const [link, setLink] = React.useState("");
   const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleViewModalOpen = () => setViewModalOpen(true);
   const handleViewModalClose = () => setViewModalOpen(false);
   const [showImage, setShowImage] = useState(false);
-
-  
 
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -61,14 +57,14 @@ export default function AddProject() {
   const handleChangeImg = (imgDataUrl) => {
     setUploadImg(imgDataUrl);
     setImgDataUrl(imgDataUrl);
-    setShowImage(true); 
+    setShowImage(true);
   };
   const [formData, setFormData] = useState({
     userId: "1",
     title: "",
     tags: "",
     description: "",
-    date: "2024-02-02"
+    date: "2024-02-02",
   });
 
   const handleCancel = () => {
@@ -80,71 +76,67 @@ export default function AddProject() {
       date: "",
       link: "",
     });
-    setLink("")
-    setUploadImg(null) 
-    setShowImage(false)
+    setLink("");
+    setUploadImg(null);
+    setShowImage(false);
   };
-  
+
   const handleFormProject = (event, name) => {
     if (name === "tags") {
       const tagsArray = event.target.value.split(",");
-    setFormData({
-      ...formData,
-      [name]: tagsArray,
-    });
-  }else{
-    setFormData({
-      ...formData,
-      [name]: event.target.value,
-    });
+      setFormData({
+        ...formData,
+        [name]: tagsArray,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: event.target.value,
+      });
+    }
+  };
+  const { token } = useAuth();
 
-  }};
-  const {token} = useAuth();
-  
   const uploadBase64Image = (base64) => {
     fetch(base64)
-      .then(res => res.blob())
-      .then(blob => {
+      .then((res) => res.blob())
+      .then((blob) => {
         const fd = new FormData();
         const file = new File([blob], "filename.jpeg");
-        fd.append('image', file)
-        const API_URL = 'http://localhost:8085/api/project/image/6';
+        fd.append("image", file);
+        const API_URL = "http://localhost:8085/api/project/image/2";
         fetch(API_URL, {
-          method: 'POST',
+          method: "POST",
           body: fd,
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         })
-          .then(res => {
-              if (!res.ok) {
-                  throw new Error('Erro ao enviar o arquivo: ' + res.status);
-              }
-              console.log('Arquivo enviado com sucesso!');
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error("Erro ao enviar o arquivo: " + res.status);
+            }
+            console.log("Arquivo enviado com sucesso!");
           })
-          .catch(error => console.error('Erro ao enviar o arquivo:', error));
+          .catch((error) => console.error("Erro ao enviar o arquivo:", error));
       })
-      .catch(error => console.error('Erro ao converter o arquivo:', error));
-}
+      .catch((error) => console.error("Erro ao converter o arquivo:", error));
+  };
 
-  
-  
-  
-  
   const handleProject = async () => {
     try {
       const response = await fetch("http://localhost:8085/api/project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           userId: formData.userId,
           title: formData.title,
-          tags:  formData.tags,
+          tags: formData.tags,
           description: formData.description,
-          date: formData.date
+          date: formData.date,
         }),
       });
 
@@ -164,13 +156,12 @@ export default function AddProject() {
     }
   };
 
-
   return (
     <div>
       <Button
         onClick={handleOpen}
         sx={{
-          marginTop:"10px",
+          marginTop: "10px",
           width: "200",
           height: "42",
           backgroundColor: "#E0E0E0",
@@ -300,9 +291,9 @@ export default function AddProject() {
                 src={uploadImg}
                 alt="Imagem Selecionada"
                 value={formData.image}
-                  onChange={(e) => {
-                    handleFormProject(e, "image");
-                  }}
+                onChange={(e) => {
+                  handleFormProject(e, "image");
+                }}
                 style={{ maxWidth: "100%", height: "380px" }}
               />
             ) : (
@@ -321,11 +312,10 @@ export default function AddProject() {
               <Button
                 variant="contained"
                 size="medium"
-                onClick={()  => {
+                onClick={() => {
                   handleProject();
-                  handleCancel();}
-                }
-
+                  handleCancel();
+                }}
                 sx={{
                   marginTop: "10px",
                   marginRight: "10px",
@@ -339,10 +329,10 @@ export default function AddProject() {
               <Button
                 variant="contained"
                 size="medium"
-                onClick={()  => {
+                onClick={() => {
                   handleClose();
-                  handleCancel();}
-                }
+                  handleCancel();
+                }}
                 sx={{
                   marginTop: "10px",
                   width: "7rem",
@@ -395,7 +385,7 @@ export default function AddProject() {
               sx={{ marginBottom: "20px" }}
               value={formData.title}
               onChange={(e) => {
-                handleFormProject(e,"title")
+                handleFormProject(e, "title");
               }}
             />
             <TextField
@@ -403,11 +393,10 @@ export default function AddProject() {
               label="Tags"
               variant="outlined"
               value={formData.tags}
-                  onChange={(e) => {
-                    handleFormProject(e, "tags");
-                  }}
+              onChange={(e) => {
+                handleFormProject(e, "tags");
+              }}
               sx={{ marginBottom: "20px" }}
-              
             />
             <TextField
               id="outlined-basic"
@@ -437,27 +426,43 @@ export default function AddProject() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", backgroundColor: "#fff", padding: "20px", minWidth:"300px" }}>
-          <Box sx={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-              <Typography id="modal-modal-title">
-                Projeto Adicionado com sucesso
-              </Typography>
-              <CheckCircleIcon sx={{margin:"0 auto", color: "#118822"}}/>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    onClick={() => {
-                      handleClose();
-                      setOpenModal(false);
-                    }}
-                    sx={{
-                    marginTop:"10px",
-                    background: "linear-Gradient(#FF8833, #FF5522)",
-                  }}
-                  >
-                    VOLTAR PARA PROJETOS
-                </Button>
-           </Box>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "#fff",
+            padding: "20px",
+            minWidth: "300px",
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <Typography id="modal-modal-title">
+              Projeto Adicionado com sucesso
+            </Typography>
+            <CheckCircleIcon sx={{ margin: "0 auto", color: "#118822" }} />
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => {
+                handleClose();
+                setOpenModal(false);
+              }}
+              sx={{
+                marginTop: "10px",
+                background: "linear-Gradient(#FF8833, #FF5522)",
+              }}
+            >
+              VOLTAR PARA PROJETOS
+            </Button>
+          </Box>
         </div>
       </Modal>
     </div>

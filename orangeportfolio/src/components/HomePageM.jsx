@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ResponsiveAppBar from "./AppBarM";
 import { Container, Typography, Box, TextField } from "@mui/material";
 import Avatar from "../assets/img/Avatar.png";
 import AddProject from "./Modal";
 import ProjectListM from "./ProjectListM";
-
+import { useAuth } from "../contexts/AuthContext";
 function HomePageM() {
  
-  const [userName, setUserName] = useState("");
- 
+  const {user} = useAuth();
+  console.log("esse e o user",user);
+  const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
+  
   return (
     <div>
       <ResponsiveAppBar />
@@ -44,7 +46,7 @@ function HomePageM() {
               lineHeight: "60px",
             }}
           >
-            Camila Soares
+            {userName}
           </Typography>
           <AddProject />
         </Box>

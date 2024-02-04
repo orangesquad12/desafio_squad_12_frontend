@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, useMediaQuery, useTheme } from "@mui/material";
 import ButtonLargerM from "./ButtonLargM";
 import styled from "styled-components";
@@ -33,7 +33,7 @@ const Container = styled.div`
 `;
 
 function FormLoginM() {
-  const { setAuthToken } = useAuth();
+  const { setAuthToken, setUserDetails } = useAuth();
   const [showPass, setShowPass] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -41,6 +41,8 @@ function FormLoginM() {
   const togglePass = () => {
     setShowPass(!showPass);
   };
+
+  
 
   const handleLogin = async () => {
     try {
@@ -62,11 +64,31 @@ function FormLoginM() {
         const token = data.token;
         setAuthToken(token);
         navigate("/portfolio");
+        fetchUserByEmail();
       } else {
         console.error("Erro ao fazer login");
       }
     } catch (error) {
       console.error("Erro ao fazer login:", error);
+    }
+  };
+  const fetchUserByEmail = async () => {
+    try {
+      if (email.trim() !== "") {
+        const response = await fetch(
+          `http://localhost:8085/api/users?email=${email}`
+        );
+
+        if (response.ok) {
+          const user = await response.json();
+          setUserDetails(user);
+          console.log("Usuário encontrado:", user);
+        } else {
+          console.error("Erro ao buscar usuário por email");
+        }
+      }
+    } catch (error) {
+      console.error("Erro ao buscar usuário por email:", error);
     }
   };
 

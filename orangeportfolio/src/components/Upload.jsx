@@ -51,8 +51,8 @@ export default function InputFileUpload({ onChange }) {
     }
   };
   return (
-    <UploadFile component="label" variant="contained">
-      <ImageIconCustom />
+    <UploadFile component="label" variant="contained" sx={{maxWidth:"98%"}}>
+      <ImageIconCustom  />
 
       <UploadText>Compartilhe seu talento com milhares de pessoas</UploadText>
       <VisuallyHiddenInput type="file" onChange={handleChangeFile} />

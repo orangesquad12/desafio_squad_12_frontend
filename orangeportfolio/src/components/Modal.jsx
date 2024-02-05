@@ -49,7 +49,8 @@ export default function AddProject() {
   const handleViewModalOpen = () => setViewModalOpen(true);
   const handleViewModalClose = () => setViewModalOpen(false);
   const [showImage, setShowImage] = useState(false);
-
+  const {user} = useAuth();
+  const idUser = user.id;
   const handleCloseModal = () => {
     setOpenModal(false);
   };
@@ -60,7 +61,7 @@ export default function AddProject() {
     setShowImage(true);
   };
   const [formData, setFormData] = useState({
-    userId: "1",
+    userId: idUser,
     title: "",
     tags: "",
     description: "",
@@ -69,7 +70,7 @@ export default function AddProject() {
 
   const handleCancel = () => {
     setFormData({
-      userId: "1",
+      userId: "",
       title: "",
       tags: "",
       description: "",
@@ -104,7 +105,7 @@ export default function AddProject() {
         const fd = new FormData();
         const file = new File([blob], "filename.jpeg");
         fd.append("image", file);
-        const API_URL = "http://localhost:8085/api/project/image/2";
+        const API_URL = "http://localhost:8085/api/project/image/15";
         fetch(API_URL, {
           method: "POST",
           body: fd,
@@ -372,6 +373,11 @@ export default function AddProject() {
                 marginBottom: "20px",
                 "&.editProject2": {
                   display: "none",
+                  "@media screen and (max-width: 740px)": {
+                    "&.editProject2": {
+                      display: "block", 
+                    }
+                  }
                 },
               }}
               className="editProject2"

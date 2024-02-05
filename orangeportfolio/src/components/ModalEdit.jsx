@@ -238,6 +238,11 @@ export default function AddProject() {
                 marginLeft: "20px",
                 ".editProject2": {
                   display: "block",
+                  "@media screen and (max-width: 740px)": {
+                    "&.editProject2": {
+                      display: "block", 
+                    }
+                  }
                 },
               },
             }}

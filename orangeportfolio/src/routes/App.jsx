@@ -15,6 +15,7 @@ function App(){
                     <Route path="/cadastro" element={<RegisterM/>}/>
                     <Route path="/portfolio" element={<HomePageM/>}/>
                     <Route path="/descobrir" element={<Discovery/>}/>
+                    <Route path="/*" element={<h1>Not Found</h1>} />
                 </Routes>
             </AuthProvider>   
         </BrowserRouter>

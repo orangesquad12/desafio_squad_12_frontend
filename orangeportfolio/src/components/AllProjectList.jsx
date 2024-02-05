@@ -45,9 +45,6 @@ function AllProjectList() {
                                     src={item.image} 
                                     style={{ maxWidth: '100%', width: '100%' }} 
                                 />
-                                <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
-                                    <Edit />
-                                </Box>
                             </div>                          
                             <Box sx={{width:'100%', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between',marginTop:'10px', maxHeight: '50px'}}>
                                 <Box sx={{display:'flex',flexDirection:'row',alignItems:'center',}}>

@@ -145,9 +145,8 @@ function ResponsiveAppBar() {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0, marginRight: "30px" }}
               >
-                <Avatar alt={user?.firstName}>
-                  {user?.firstName?.charAt(0)}
-                </Avatar>
+                <Avatar/>
+                  
               </IconButton>
             </Tooltip>
             <Menu

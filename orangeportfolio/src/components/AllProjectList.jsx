@@ -10,7 +10,7 @@ function AllProjectList() {
     const nick = "Nome do Usuario";
     const [projects, setProjects] = useState([]);
     useEffect(() => {
-        fetch(`http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project`)
+        fetch(`https://desafio-deploy-squad12.onrender.com/api/project`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao fazer a requisição');

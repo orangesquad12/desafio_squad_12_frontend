@@ -13,7 +13,7 @@ function ProjectList() {
     
     useEffect(() => {
     if (user) { 
-        fetch(`http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project/${userId}`)
+        fetch(`https://desafio-deploy-squad12.onrender.com/api/project/${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao fazer a requisição');

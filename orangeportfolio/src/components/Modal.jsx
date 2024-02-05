@@ -113,7 +113,7 @@ export default function AddProject() {
         const fd = new FormData();
         const file = new File([blob], "filename.jpeg");
         fd.append("image", file);
-        const API_URL = `http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project/image/${idProject}`;
+        const API_URL = `https://desafio-deploy-squad12.onrender.com/api/project/image/${idProject}`;
         fetch(API_URL, {
           method: "POST",
           body: fd,
@@ -135,7 +135,7 @@ export default function AddProject() {
 
   const handleProject = async () => {
     try {
-      const response = await fetch("http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project", {
+      const response = await fetch("https://desafio-deploy-squad12.onrender.com/api/project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

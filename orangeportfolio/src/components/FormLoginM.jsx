@@ -46,7 +46,7 @@ function FormLoginM() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/auth/login", {
+      const response = await fetch("https://desafio-deploy-squad12.onrender.com/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ function FormLoginM() {
     try {
       if (email.trim() !== "") {
         const response = await fetch(
-          `http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/users?email=${email}`
+          `https://desafio-deploy-squad12.onrender.com/api/users?email=${email}`
         );
 
         if (response.ok) {

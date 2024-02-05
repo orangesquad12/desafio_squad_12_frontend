@@ -2,6 +2,7 @@ import { BrowserRouter, Routes,Route } from "react-router-dom";
 import LoginM from "../components/LoginM";
 import RegisterM from "../components/RegisterM";
 import HomePageM from "../components/HomePageM";
+import Discovery from "../components/Discovery";
 import { AuthProvider } from '../contexts/AuthContext';
 
 

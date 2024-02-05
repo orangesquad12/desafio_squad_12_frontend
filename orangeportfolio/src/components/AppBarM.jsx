@@ -145,7 +145,7 @@ function ResponsiveAppBar() {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0, marginRight: "30px" }}
               >
-                <Avatar alt={user?.firstName} src="/static/images/avatar/2.jpg">
+                <Avatar alt={user?.firstName}>
                   {user?.firstName?.charAt(0)}
                 </Avatar>
               </IconButton>

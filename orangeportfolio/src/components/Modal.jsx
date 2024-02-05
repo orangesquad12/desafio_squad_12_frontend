@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { TextField, Link, Chip } from "@mui/material";
@@ -50,7 +50,14 @@ export default function AddProject() {
   const handleViewModalClose = () => setViewModalOpen(false);
   const [showImage, setShowImage] = useState(false);
   const {user} = useAuth();
-  const idUser = user.id;
+  const [idUser, setIdUser] = useState(user ? user.id : "");
+  console.log(idUser,"esse e o id do usuario")
+  useEffect(() => {
+    if (user) {
+      // Atualiza o idUser quando o usuário mudar
+      setIdUser(user.id);
+    }
+  }, [user]);
   const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
   const handleCloseModal = () => {
     setOpenModal(false);
@@ -106,7 +113,7 @@ export default function AddProject() {
         const fd = new FormData();
         const file = new File([blob], "filename.jpeg");
         fd.append("image", file);
-        const API_URL = `http://localhost:8085/api/project/image/${idProject}`;
+        const API_URL = `http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project/image/${idProject}`;
         fetch(API_URL, {
           method: "POST",
           body: fd,
@@ -124,10 +131,11 @@ export default function AddProject() {
       })
       .catch((error) => console.error("Erro ao converter o arquivo:", error));
   };
+  
 
   const handleProject = async () => {
     try {
-      const response = await fetch("http://localhost:8085/api/project", {
+      const response = await fetch("http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

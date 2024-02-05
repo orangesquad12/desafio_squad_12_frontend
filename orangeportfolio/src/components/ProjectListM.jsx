@@ -10,8 +10,10 @@ function ProjectList() {
     const userId = user.id;
     const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
     const [projects, setProjects] = useState([]);
+    
     useEffect(() => {
-        fetch(`http://localhost:8085/api/project/${userId}`)
+    if (user) { 
+        fetch(`http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project/${userId}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao fazer a requisição');
@@ -31,7 +33,8 @@ function ProjectList() {
             .catch(error => {
                 console.error('Erro:', error);
             });
-    }, []);
+        }
+    }, [userId]);
     return( 
     <Box p={8} sx={{display:'flex'}}>
         <Toolbar />

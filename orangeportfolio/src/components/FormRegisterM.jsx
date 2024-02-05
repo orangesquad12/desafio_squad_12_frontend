@@ -68,7 +68,7 @@ function FormRegister() {
         console.error("Preencha todos os campos obrigatórios");
         return;
       }
-      const response = await fetch("http://localhost:8085/api/auth/register", {
+      const response = await fetch("http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -7,15 +7,15 @@ import {  useState, useEffect } from "react";
 
 function AllProjectList() {
     const {user} = useAuth();
-    const userId = user.id;
-    const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
+    const nick = "Nome do Usuario";
     const [projects, setProjects] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:8085/api/project`)
+        fetch(`http://ec2-3-91-42-31.compute-1.amazonaws.com:8085/api/project`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao fazer a requisição');
                 }
+                console.log("response",response)
                 return response.json();
             })
             .then(data => {
@@ -23,7 +23,7 @@ function AllProjectList() {
                     tags: item.tags,
                     image: item.image,
                     avatar: Avatar,
-                    name: userName,
+                    name: nick,
                     id: item.id
                 }));
                 setProjects(mappedProjects);

@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
   }, [token]);
 
   useEffect(() => {
-    // Atualiza o localStorage sempre que o usuário muda
     localStorage.setItem("user", JSON.stringify(user));
   }, [user]);
 
@@ -26,6 +25,13 @@ export const AuthProvider = ({ children }) => {
 
   const setUserDetails = (userData) => {
     setUser(userData);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setToken(null);
+    setUser(null);
   };
 
   return (

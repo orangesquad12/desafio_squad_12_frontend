@@ -25,7 +25,7 @@ function ResponsiveAppBar() {
   const { user } = useAuth();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const {logout} = useAuth();
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -167,7 +167,14 @@ function ResponsiveAppBar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} 
+                onClick={() => {
+                  if (setting === "Logout") {
+                    logout();
+                  } else {
+                    handleCloseUserMenu();
+                  }
+                }}>
                   <Link
                     to={"/"}
                     style={{ textDecoration: "none", color: "inherit" }}
@@ -180,7 +187,7 @@ function ResponsiveAppBar() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+      </AppBar>
   );
 }
 export default ResponsiveAppBar;

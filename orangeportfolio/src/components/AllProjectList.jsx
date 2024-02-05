@@ -5,13 +5,13 @@ import { useAuth } from "../contexts/AuthContext"
 import {  useState, useEffect } from "react";
 
 
-function ProjectList() {
+function AllProjectList() {
     const {user} = useAuth();
     const userId = user.id;
     const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
     const [projects, setProjects] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:8085/api/project/${userId}`)
+        fetch(`http://localhost:8085/api/project`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Erro ao fazer a requisição');
@@ -86,4 +86,4 @@ function ProjectList() {
          
     </Box>
     )
-}export default ProjectList
+}export default AllProjectList

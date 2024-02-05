@@ -51,6 +51,23 @@ export default function AddProject() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleDeleteProject = () => {
+    
+    fetch(`http://localhost:8085/api/project/22`, {
+      method: 'DELETE',
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Projeto excluído com sucesso');
+      } else {
+        console.error('Erro ao excluir o projeto');
+      }
+    })
+    .catch(error => {
+      console.error('Erro ao excluir o projeto:', error);
+    });
+  };
+
   return (
     <div>
       <Button
@@ -90,6 +107,7 @@ export default function AddProject() {
               <Button
                 variant="contained"
                 size="medium"
+                onClick={handleDeleteProject}
                 sx={{
                   display: "block",
                   marginTop: "16px",
@@ -99,7 +117,7 @@ export default function AddProject() {
                   marginRight:"15px",
                 }}
               >
-                SALVAR
+                EXCLUIR
               </Button>
 
            

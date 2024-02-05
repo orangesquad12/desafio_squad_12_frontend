@@ -1,5 +1,5 @@
 import AppBarM from "./AppBarM";
-import ProjectListM from "./ProjectListM";
+import AllProjectList from "./AllProjectList";
 import { TextField,Box,Typography } from "@mui/material";
 
 function Discovery() {
@@ -44,7 +44,7 @@ function Discovery() {
             label="Buscar Tags"
             />
         </Box>
-        <ProjectListM />
+        <AllProjectList/>
     </div>
   );
 }

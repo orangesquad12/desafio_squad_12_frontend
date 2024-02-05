@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import ResponsiveAppBar from "./AppBarM";
 import { Container, Typography, Box, TextField } from "@mui/material";
-import Avatar from "../assets/img/Avatar.png";
 import AddProject from "./Modal";
 import ProjectListM from "./ProjectListM";
 import { useAuth } from "../contexts/AuthContext";
+import AvatarImage from "../assets/img/Avatar.png";
+
 function HomePageM() {
  
   const {user} = useAuth();
@@ -27,7 +28,7 @@ function HomePageM() {
         }}
       >
         <img
-          src={Avatar}
+          src={AvatarImage}
           alt=""
           style={{
             borderRadius: "50%",

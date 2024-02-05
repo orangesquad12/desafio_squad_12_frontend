@@ -18,6 +18,7 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
+
 const pages = ["Meus Projetos", "Descobrir"];
 const settings = ["Logout"];
 
@@ -145,8 +146,9 @@ function ResponsiveAppBar() {
                 onClick={handleOpenUserMenu}
                 sx={{ p: 0, marginRight: "30px" }}
               >
-                <Avatar/>
-                  
+                <Avatar  src="../assets/img/Avatar.png">
+                  {user?.firstName?.charAt(0)}
+                </Avatar>
               </IconButton>
             </Tooltip>
             <Menu

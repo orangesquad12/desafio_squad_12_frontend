@@ -1,102 +1,47 @@
 import { Box, Typography, Toolbar, Grid, Chip} from "@mui/material"
-import transferirImage from '../assets/img/img_projeto.png'
 import Avatar from  '../assets/img/Avatar.png'
 import Edit from "./Edit"
-
-const projects = [
-    {
-        id:1,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip  key="1" 
-                label="UX" 
-                />, 
-                <Chip  sx={{
-                    '& .MuiChip-label': {
-                        padding:"8px",
-                    },
-                    }}key="2" label="Web" 
-                 />],
-        thumb: transferirImage,
-        
-    },
-    {
-        id:2,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip key="3" label="UX"  />, <Chip sx={{
-            '& .MuiChip-label': {
-                padding:"8px",
-            },
-            }} key="4" label="web"  />],
-        thumb: transferirImage,
-    },
-    {
-        id:3,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
-            '& .MuiChip-label': {
-                padding:"8px",
-            },
-            }} key="5" label="web"/>],
-        thumb: transferirImage,
-    },
-    {
-        id:4,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip sx={{   
-            '& .MuiChip-label': {
-                padding:"8px",
-            },
-            }} key="6" label="web" />],
-        thumb: transferirImage, 
-    },
-    {
-        id:5,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip key="1" label="UX" />, <Chip sx={{
-            '& .MuiChip-label': {
-                padding:"8px",
-            },
-            }} key="7" label="web" />],
-        thumb: transferirImage,
-    },
-    {
-        id:6,
-        title:
-        'Camila Soares',
-        avatar: Avatar,
-        tag:  [<Chip key="8" label="UX" />, <Chip sx={{
-            '& .MuiChip-label': {
-                padding:"8px",
-            },
-            }} key="9" label="web" />],
-        thumb: transferirImage,
-    }
-]
+import { useAuth } from "../contexts/AuthContext"
+import {  useState, useEffect } from "react";
 
 
 function ProjectList() {
+    const {user} = useAuth();
+    const userId = user.id;
+    const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
+    const [projects, setProjects] = useState([]);
+    useEffect(() => {
+        fetch(`http://localhost:8085/api/project/${userId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao fazer a requisição');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const mappedProjects = Object.values(data).map(item => ({
+                    tags: item.tags,
+                    image: item.image,
+                    avatar: Avatar,
+                    name: userName
+                }));
+                setProjects(mappedProjects);
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+            });
+    }, []);
     return( 
     <Box p={8} sx={{display:'flex'}}>
         <Toolbar />
          <Grid container spacing={2}>
             {
                 projects.map((item,index) =>(
-                    <Grid item key={item.id} lg={3} md={4} sm={6} xs={12} justifyContent='center'>
+                    <Grid item key={index} lg={3} md={4} sm={6} xs={12} justifyContent='center'>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <div style={{ position: 'relative', width: '100%', height: '100%' }}>
                                 <img 
-                                    src={item.thumb} 
-                                    alt={item.title}
+                                    src={item.image} 
                                     style={{ maxWidth: '100%', width: '100%' }} 
                                 />
                                 <Box sx={{ position: 'absolute', top: 0, right: 0 }}>
@@ -106,7 +51,7 @@ function ProjectList() {
                             <Box sx={{width:'100%', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between',marginTop:'10px', maxHeight: '50px'}}>
                                 <Box sx={{display:'flex',flexDirection:'row',alignItems:'center',}}>
                                         <img
-                                            src={item.avatar} 
+                                            src= {item.avatar}
                                             style={{borderRadius:'50%',
                                             width:'2rem',
                                             height:'2rem',
@@ -115,15 +60,22 @@ function ProjectList() {
                                             sx={{
                                                 fontFamily: 'Roboto',
                                                 fontSize: '.8em',
-                                                fontWeight: 400,
+                                                fontWeight: 500,
+                                                color: '#515255',
                                                 lineHeight: '16px',
                                                 letterSpacing: '0.15px',
+                                                marginLeft:'1em',
                                             
-                                        }}>{item.title}</Typography>
+                                        }}>{item.name}</Typography>
                                 </Box>
                                 <Box sx={{
                                 }}>
-                                   {item.tag}                                </Box>
+                                   {item.tags.map((tag, tagIndex) => (
+                                        <Chip key={tagIndex} label={tag}  sx={{ '& .MuiChip-label': {
+                                            padding:"8px",
+                                        },}}/>
+                                    ))}                               
+                                </Box>
                             </Box> 
                         </Box> 
                     </Grid>

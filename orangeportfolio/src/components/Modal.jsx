@@ -98,14 +98,14 @@ export default function AddProject() {
   };
   const { token } = useAuth();
 
-  const uploadBase64Image = (base64) => {
+  const uploadBase64Image = (base64,idProject) => {
     fetch(base64)
       .then((res) => res.blob())
       .then((blob) => {
         const fd = new FormData();
         const file = new File([blob], "filename.jpeg");
         fd.append("image", file);
-        const API_URL = "http://localhost:8085/api/project/image/15";
+        const API_URL = `http://localhost:8085/api/project/image/${idProject}`;
         fetch(API_URL, {
           method: "POST",
           body: fd,
@@ -144,9 +144,11 @@ export default function AddProject() {
       if (response.ok) {
         console.log("cadastro de projeto bem sucedido");
         const data = await response.json();
+        const idProject = data.id;
+        console.log("id enviado", idProject);
         setOpenModal(true);
         console.log(data);
-        uploadBase64Image(imgDataUrl);
+        uploadBase64Image(imgDataUrl, idProject);
         setUploadImg(null);
         setShowImage(false);
       } else {

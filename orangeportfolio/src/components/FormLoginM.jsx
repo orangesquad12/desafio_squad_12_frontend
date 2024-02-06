@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { TextField, useMediaQuery, useTheme } from "@mui/material";
-import ButtonLargerM from "./ButtonLargM";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { TextField, Typography, InputAdornment } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-import InputAdornment from "@mui/material/InputAdornment";
-import Typography from "@mui/material/Typography";
+import styled from "styled-components";
+import ButtonLargerM from "./ButtonLargM";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 const Title = styled.h1`
-    font-family: Roboto;
-    font-size: 48px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 40px; /;
-    color: #222244;
-    text-align:center;
-    margin-bottom: 32px;
-    @media (max-width: 592px) {
-      font-size: 24px;
-      line-height: 24px;
+  font-family: Roboto;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  color: #222244;
+  text-align: center;
+  margin-bottom: 32px;
+  @media (max-width: 592px) {
+    font-size: 24px;
+    line-height: 24px;
   }
 `;
 
@@ -38,11 +36,10 @@ function FormLoginM() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const togglePass = () => {
     setShowPass(!showPass);
   };
-
-  
 
   const handleLogin = async () => {
     try {
@@ -58,15 +55,11 @@ function FormLoginM() {
       });
 
       if (response.ok) {
-        console.log("login bem-sucedido");
         const data = await response.json();
-        console.log(data)
         const token = data.token;
-        setAuthToken(token);
-        fetchUserByEmail();
-        console.log("123");
+        await setAuthToken(token);
+        await fetchUserByEmail();
         navigate("/portfolio");
-        console.log("456");
       } else {
         console.error("Erro ao fazer login");
       }
@@ -74,9 +67,9 @@ function FormLoginM() {
       console.error("Erro ao fazer login:", error);
     }
   };
+
   const fetchUserByEmail = async () => {
     try {
-      console.log("789")
       if (email.trim() !== "") {
         const response = await fetch(
           `https://desafio-deploy-squad12.onrender.com/api/users?email=${email}`
@@ -84,8 +77,12 @@ function FormLoginM() {
 
         if (response.ok) {
           const user = await response.json();
-          setUserDetails(user);
-          console.log("Usuário encontrado:", user);
+          if (user) {
+            setUserDetails(user);
+            console.log("Usuário encontrado:", user);
+          } else {
+            console.error("Usuário não encontrado");
+          }
         } else {
           console.error("Erro ao buscar usuário por email");
         }

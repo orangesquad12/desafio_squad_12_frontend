@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import ResponsiveAppBar from "./AppBarM";
 import { Container, Typography, Box, TextField } from "@mui/material";
-import Avatar from "../assets/img/Avatar.png";
+import Avatar from "../assets/img/iconavatar.png";
 import AddProject from "./Modal";
 import ProjectListM from "./ProjectListM";
 import { useAuth } from "../contexts/AuthContext";

@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import ResponsiveAppBar from "./AppBarM";
 import { Container, Typography, Box, TextField } from "@mui/material";
+import Avatar from "../assets/img/googlebtn.png";
 import AddProject from "./Modal";
 import ProjectListM from "./ProjectListM";
 import { useAuth } from "../contexts/AuthContext";
-import AvatarImage from "../assets/img/Avatar.png";
-
 function HomePageM() {
  
   const {user} = useAuth();
   console.log("esse e o user",user);
   const userName = user ? `${user.firstName} ${user.lastName}` : "Nome do Usuário";
-  
+  console.log("user name")
   return (
     <div>
       <ResponsiveAppBar />
@@ -27,16 +26,16 @@ function HomePageM() {
           },
         }}
       >
-        <img
-          src={AvatarImage}
-          alt=""
-          style={{
-            borderRadius: "50%",
-            width: "122px",
-            height: "122px",
-            marginLeft: "40px",
-          }}
-        />
+       <img
+        src={Avatar}
+        alt=""
+        style={{
+        borderRadius: "50%",
+        width: "122px",
+        height: "122px",
+        marginLeft: "40px",
+        }}
+/>
         <Box sx={{ marginLeft: "50px" }}>
           <Typography
             sx={{

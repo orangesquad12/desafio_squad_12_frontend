@@ -63,8 +63,10 @@ function FormLoginM() {
         console.log(data)
         const token = data.token;
         setAuthToken(token);
-        navigate("/portfolio");
         fetchUserByEmail();
+        console.log("123");
+        navigate("/portfolio");
+        console.log("456");
       } else {
         console.error("Erro ao fazer login");
       }
@@ -74,6 +76,7 @@ function FormLoginM() {
   };
   const fetchUserByEmail = async () => {
     try {
+      console.log("789")
       if (email.trim() !== "") {
         const response = await fetch(
           `https://desafio-deploy-squad12.onrender.com/api/users?email=${email}`
